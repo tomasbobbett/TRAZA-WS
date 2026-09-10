@@ -1,0 +1,22 @@
+{
+  "name": "NORTE",
+  "short_name": "NORTE",
+  "lang": "es-AR",
+  "start_url": "/nichos/inmobiliaria.html",
+  "scope": "/",
+  "display": "browser",
+  "background_color": "#17241c",
+  "theme_color": "#17241c",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

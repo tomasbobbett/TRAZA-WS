@@ -1,0 +1,22 @@
+{
+  "name": "CALMA",
+  "short_name": "CALMA",
+  "lang": "es-AR",
+  "start_url": "/nichos/alojamiento.html",
+  "scope": "/",
+  "display": "browser",
+  "background_color": "#25261f",
+  "theme_color": "#25261f",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

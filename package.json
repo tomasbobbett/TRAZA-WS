@@ -1,0 +1,15 @@
+{
+  "name": "traza-ws",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "TRAZA y doce demos comerciales listas para Netlify",
+  "engines": { "node": ">=22.13.0" },
+  "scripts": {
+    "build": "node scripts/build.mjs && node --test tests/*.test.mjs",
+    "test": "node scripts/build.mjs && node --test tests/*.test.mjs",
+    "dev": "node scripts/build.mjs && node scripts/serve.mjs",
+    "preview": "node scripts/serve.mjs",
+    "verify:http": "node scripts/verify-http.mjs"
+  }
+}

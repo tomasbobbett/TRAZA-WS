@@ -1,0 +1,36 @@
+/* Match the public TRAZA contact button without inheriting a demo's theme. */
+.floating-contact {
+    position: fixed;
+    right: 22px;
+    bottom: 22px;
+    z-index: 80;
+    display: inline-flex;
+    height: 48px;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    border: 0;
+    border-radius: 999px;
+    padding: 0 18px 0 16px;
+    transform: translateY(86px);
+    background: #25d366;
+    color: #fff;
+    font-family: "Manrope", Arial, sans-serif;
+    box-shadow: 0 6px 20px rgba(0,0,0,.14);
+    text-decoration: none;
+    opacity: 0;
+    pointer-events: none;
+    transition: transform .5s ease, background-color .5s ease, box-shadow .5s ease, opacity .5s ease;
+}
+.floating-contact.is-visible,
+.floating-contact:focus-visible { transform: translateY(0); opacity: 1; pointer-events: auto; }
+.floating-contact:hover { background: #20bd5a; transform: translateY(-3px); box-shadow: 0 9px 24px rgba(0,0,0,.2); }
+.floating-contact__icon { display: grid; width: 24px; height: 24px; flex: 0 0 24px; place-items: center; }
+.floating-contact__icon img { display: block; width: 100%; height: 100%; object-fit: contain; filter: brightness(0) invert(1); }
+.floating-contact__label { font-size: .8rem; font-weight: 700; letter-spacing: 0; line-height: 1; }
+@media (max-width: 600px) {
+    .floating-contact { right: 16px; bottom: 16px; height: 48px; padding-inline: 15px; }
+    .floating-contact__icon { width: 21px; height: 21px; flex-basis: 21px; }
+}
+@media (hover: none), (pointer: coarse) { .floating-contact:hover { transform: none; } }
+

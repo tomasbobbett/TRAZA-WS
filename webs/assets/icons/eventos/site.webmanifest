@@ -1,0 +1,22 @@
+{
+  "name": "FUEGO",
+  "short_name": "FUEGO",
+  "lang": "es-AR",
+  "start_url": "/nichos/eventos.html",
+  "scope": "/",
+  "display": "browser",
+  "background_color": "#110512",
+  "theme_color": "#110512",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+[build]
+  base = "."
+  command = "npm run build"
+  publish = "public"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+[build.processing.html]
+  pretty_urls = false
+
+[dev]
+  command = "npm run dev"
+  targetPort = 4183
+  port = 8888
+  publish = "public"
+  framework = "#custom"

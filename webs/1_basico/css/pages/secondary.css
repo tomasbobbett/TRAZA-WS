@@ -1,0 +1,27 @@
+.secondary-main { padding-top:170px; padding-bottom:110px; }
+.secondary-main > .display { max-width:1000px; font-size:clamp(3.5rem,9vw,8rem); }
+.secondary-intro { max-width:700px; margin:32px 0 55px; color:#c3c3be; font-size:1.05rem; line-height:1.8; }
+.secondary-grid { display:grid; grid-template-columns:1.1fr .9fr; gap:40px; align-items:start; }
+.secondary-photo { width:100%; height:610px; object-fit:cover; }
+.info-panel { padding:40px; border:1px solid #42423d; background:#151512; }
+.info-panel h2 { margin:0 0 30px; font-family:var(--font-display); font-size:clamp(2.5rem,4vw,4rem); line-height:1; }
+.info-panel p, .info-panel dd { color:#c3c3be; line-height:1.8; }
+.info-panel dt { margin-top:25px; font-weight:700; color:var(--lime); }
+.info-panel dd { margin:8px 0 25px; }
+.info-panel .button { margin-top:24px; }
+.faq-list { max-width:950px; margin-bottom:45px; }
+.faq-list details { padding:22px 0; border-bottom:1px solid #45453e; }
+.faq-list summary { cursor:pointer; font-size:1.2rem; font-weight:600; line-height:1.5; padding-right:20px; }
+.faq-list p { max-width:750px; margin:20px 0 0; color:#c3c3be; line-height:1.8; }
+.contact-form { display:grid; gap:13px; }
+.contact-form label { margin-top:10px; font-size:.9rem; font-weight:600; }
+.contact-form label span { color:#bdbdb6; font-weight:400; }
+.contact-form input, .contact-form textarea { width:100%; min-height:52px; border:1px solid #5d5d54; border-radius:0; padding:15px; background:#171715; color:#fff; font:inherit; }
+.contact-form textarea { resize:vertical; }
+.contact-form input::placeholder, .contact-form textarea::placeholder { color:#b4b4ac; }
+.contact-form .button { margin-top:16px; cursor:pointer; }
+.form-note, .form-status { color:#bdbdb6; font-size:.8rem; line-height:1.8; }
+.form-note a, .secondary-back { color:var(--lime); text-underline-offset:4px; }
+.secondary-back { display:block; margin-top:30px; }
+.secondary-page .footer { padding-top:20px; }
+@media(max-width:760px) { .secondary-main { padding-top:125px; padding-bottom:70px; } .secondary-grid { grid-template-columns:1fr; gap:30px; } .info-panel { padding:25px; } .secondary-photo { height:400px; } .secondary-main .button { width:100%; text-align:center; } }

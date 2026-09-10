@@ -1,0 +1,22 @@
+{
+  "name": "BRASA",
+  "short_name": "BRASA",
+  "lang": "es-AR",
+  "start_url": "/nichos/gastronomia.html",
+  "scope": "/",
+  "display": "browser",
+  "background_color": "#1e0c08",
+  "theme_color": "#1e0c08",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
