@@ -13,8 +13,14 @@ for (const { route, brand } of DEMO_ROUTES) {
   for (const path of [route, route.slice(0, -1)]) {
     const response = await fetch(base + path);
     assert.equal(response.status, 200, path);
-    assert.ok((await response.text()).includes(`<title>${brand} —`), path);
-    assert.ok(new URL(response.url).pathname.startsWith(route), `${path}: must stay in its own industry`);
+    const html = await response.text();
+    assert.ok(html.includes(`<title>${brand} —`), path);
+    const finalPath = new URL(response.url).pathname;
+    assert.ok(finalPath === route.slice(0, -1) || finalPath.startsWith(route), `${path}: must stay in its own industry`);
+    for (const [, ref] of html.matchAll(/(?:src|href)="([^"]+)"/g)) {
+      if (/^(https?:|#|mailto:|tel:|data:)/.test(ref)) continue;
+      assert.ok(ref.startsWith('/'), `${path}: ${ref} depends on a trailing slash`);
+    }
   }
 }
 if(await stat(join(root,'sitemap.xml')).then(()=>true,()=>false))assets.add('/sitemap.xml');

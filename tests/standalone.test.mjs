@@ -26,9 +26,20 @@ test('every industry opens its own complete demo and never sends visitors to the
 test('PULSO navigation stays inside its industry including contact, FAQs and the venue', async () => {
   const home = await read('/demo/gimnasio/index.html');
   for (const key of ['contacto', 'faqs', 'sedes']) {
-    assert.ok(home.includes(`href="${key}/index.html"`), key);
+    assert.ok(home.includes(`href="/demo/gimnasio/${key}/index.html"`), key);
     const page = await read(`/demo/gimnasio/${key}/index.html`);
-    assert.ok(page.includes('href="../index.html"'), key);
+    assert.ok(page.includes('href="/demo/gimnasio/index.html"'), key);
+  }
+});
+
+test('direct demos resolve resources and navigation with or without a trailing slash', async () => {
+  for (const { route } of DEMO_PAGES) {
+    const html = await read(`${route}index.html`);
+    for (const [, ref] of html.matchAll(/(?:src|href|action)="([^"]+)"/g)) {
+      if (/^(https?:|#|mailto:|tel:|data:)/.test(ref)) continue;
+      assert.equal(new URL(ref, 'https://example.com' + route).href,
+        new URL(ref, 'https://example.com' + route.slice(0, -1)).href, `${route}: ${ref}`);
+    }
   }
 });
 

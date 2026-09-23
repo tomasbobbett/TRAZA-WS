@@ -1,5 +1,5 @@
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
-import { join, dirname, posix } from 'node:path';
+import { join, dirname } from 'node:path';
 import { DEMO_PAGES, canonicalRoute } from './demo-routes.mjs';
 
 export async function separateDemos(output) {
@@ -11,8 +11,9 @@ export async function separateDemos(output) {
       const url = new URL(reference, `https://local.invalid${source}`);
       const target = canonicalRoute(url.pathname);
       const destination = target.endsWith('/') ? `${target}index.html` : target;
-      const relative = posix.relative(route, destination);
-      return `${attribute}="${relative}${url.search}${url.hash}"`;
+      // Netlify can serve a directory URL without its final slash. Root-relative
+      // references keep assets and navigation valid with either spelling.
+      return `${attribute}="${destination}${url.search}${url.hash}"`;
     });
     const file = join(output, route, 'index.html');
     await mkdir(dirname(file), { recursive: true });
