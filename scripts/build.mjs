@@ -1,7 +1,8 @@
 import { readFile, writeFile, rm, lstat, realpath } from 'node:fs/promises';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { DEMOS } from './demo-content.mjs';
+import { DEMO_ROUTES } from './demo-routes.mjs';
+import { separateDemos } from './separate-demos.mjs';
 import { resolveOrigin } from './site-origin.mjs';
 
 const project = resolve(dirname(fileURLToPath(import.meta.url)), '..');
@@ -19,6 +20,7 @@ if (existing) {
   await rm(output, { recursive: true });
 }
 await import('./prepare-public.mjs');
+await separateDemos(output);
 
 // The main address serves the complete agency page, with assets resolved from /.
 const agency = await readFile(join(output, 'agencia/index.html'), 'utf8');
@@ -30,11 +32,10 @@ const homepage = agency.replace(/\b(href|src|action)="([^"]+)"/g, (match, attrib
 await writeFile(join(output, 'index.html'), homepage);
 
 const links = [
-  ['TRAZA · Catálogo completo', '/'],
-  ['Gimnasio · PULSO', '/1_basico/index.html'],
-  ...Object.entries(DEMOS).map(([key, demo]) => [demo.label, `/nichos/${key}.html`]),
+  ...DEMO_ROUTES.map(demo => [`${demo.label} · ${demo.brand}`, demo.route]),
 ];
-await writeFile(join(output, 'enlaces.txt'), 'TRAZA — Enlaces para compartir\n\n'
+await writeFile(join(output, 'enlaces.txt'), 'TRAZA — Demos por rubro para enviar directamente al cliente\n\n'
+  + 'Copiá únicamente el enlace del rubro de tu cliente. Abre su demo sin pasar por el catálogo.\n\n'
   + (origin ? '' : 'Agregar el dominio publicado delante de cada ruta.\n\n')
   + links.map(([label, route]) => `${label}\n${origin}${route}`).join('\n\n') + '\n');
 console.log(`Netlify: public/ listo, portada completa y 12 demos. ${origin || 'El dominio se detectará al compilar en Netlify.'}`);

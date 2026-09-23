@@ -13,7 +13,7 @@ const exists=p=>stat(p).then(()=>true,()=>false);
 const attrs=tag=>Object.fromEntries([...tag.matchAll(/([\w:-]+)="([^"]*)"/g)].map(m=>[m[1],m[2].replaceAll('&amp;','&')]));
 
 test('every public page contains content, identity, language and share metadata without JavaScript',async()=>{
-  assert.equal(pages.length,19);
+  assert.equal(pages.length,34);
   for(const file of pages) {
     const html=await readFile(file,'utf8');
     assert.match(html,/<html lang="es-AR">/,file);

@@ -23,6 +23,10 @@ Ejecutar npm run build y luego npm run preview. La vista previa está en http://
 - tests/: comprobaciones de contenido, recursos e interacciones.
 - public/: salida generada; no se edita ni se versiona.
 
-Cada demo se abre desde el catálogo. /enlaces.txt contiene sus direcciones completas después de publicar.
+Cada rubro tiene una página independiente en `/demo/<rubro>/`. Por ejemplo, `/demo/gimnasio/`, `/demo/estetica/` y `/demo/gastronomia/`. El cliente entra directamente en su demo, sin pasar por el catálogo ni encontrar enlaces a otros rubros. Las consultas llegan a WhatsApp con el nombre de la demo.
+
+`/enlaces.txt` contiene las 12 direcciones para copiar y enviar al cliente. El dominio configurado es `https://trraza.netlify.app`; Netlify lo adapta automáticamente en las vistas previas. Las direcciones anteriores siguen funcionando.
+
+PULSO también tiene contacto, preguntas y sede dentro de `/demo/gimnasio/`. Las páginas comparten recursos visuales para mantener las animaciones y evitar duplicar imágenes. `scripts/demo-routes.mjs` define las direcciones; `public/` debe publicarse completo.
 
 Este repositorio contiene únicamente el sitio y sus herramientas de publicación.

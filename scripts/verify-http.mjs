@@ -2,12 +2,21 @@ import assert from 'node:assert/strict';
 import { readdir, readFile, stat } from 'node:fs/promises';
 import { resolve, join, dirname, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { DEMO_ROUTES } from './demo-routes.mjs';
 
 const root=resolve(dirname(fileURLToPath(import.meta.url)),'../public');
 const base=(process.argv[2] || 'http://127.0.0.1:4183').replace(/\/$/, '');
 async function walk(path) { const all=[]; for(const entry of await readdir(path,{withFileTypes:true})) { const p=join(path,entry.name); if(entry.isDirectory()) all.push(...await walk(p));else all.push(p); }return all; }
 const pages=(await walk(root)).filter(p=>p.endsWith('.html')&&!p.endsWith('404.html'));
 const assets=new Set(['/favicon.ico','/apple-touch-icon.png','/robots.txt','/enlaces.txt']);
+for (const { route, brand } of DEMO_ROUTES) {
+  for (const path of [route, route.slice(0, -1)]) {
+    const response = await fetch(base + path);
+    assert.equal(response.status, 200, path);
+    assert.ok((await response.text()).includes(`<title>${brand} —`), path);
+    assert.ok(new URL(response.url).pathname.startsWith(route), `${path}: must stay in its own industry`);
+  }
+}
 if(await stat(join(root,'sitemap.xml')).then(()=>true,()=>false))assets.add('/sitemap.xml');
 for(const file of pages) {
   const path='/'+relative(root,file).replaceAll('\\','/');

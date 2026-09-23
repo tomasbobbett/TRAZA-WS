@@ -228,7 +228,7 @@ export function renderDemo(demo, TRAZA_PHONE) {
         <nav class="nav" aria-label="Navegación principal">
             <a class="brand" href="#inicio"><b>${demo.brand}</b><small>Demo conceptual</small></a>
             <button aria-controls="demo-menu" class="menu-button" type="button" aria-label="Abrir menú" aria-expanded="false"><i></i><i></i></button>
-            <div class="nav-links" id="demo-menu"><a href="#servicios">Servicios</a><a href="#experiencia">Experiencia</a><a href="#visitanos">Visitanos</a><a class="back" href="../agencia/index.html#demo">← Todas las demos</a></div>
+            <div class="nav-links" id="demo-menu"><a href="#servicios">Servicios</a><a href="#experiencia">Experiencia</a><a href="#visitanos">Visitanos</a></div>
             <a class="nav-cta" href="${wa}" target="_blank" rel="noopener">${demo.action} <span>↗</span></a>
         </nav>
 
@@ -291,7 +291,7 @@ export function renderDemo(demo, TRAZA_PHONE) {
         </main>
 
         <p class="demo-disclaimer shell">Demo conceptual: marca, testimonios, cifras y ubicación ilustrativas. Las consultas llegan a TRAZA para crear una web para tu negocio; no se realizan reservas.</p>
-        <footer class="footer shell"><div><b>${demo.brand}</b><span>${demo.label}</span></div><a href="../agencia/index.html#demo">Una demo creada por TRAZA ↗</a></footer>
+        <footer class="footer shell"><div><b>${demo.brand}</b><span>${demo.label}</span></div><a href="${wa}" target="_blank" rel="noopener">Quiero esta web para mi negocio ↗</a></footer>
         <a class="floating-contact is-visible" href="${wa}" target="_blank" rel="noopener" aria-label="Consultar esta demo por WhatsApp">
             <span class="floating-contact__icon" aria-hidden="true"><img src="../1_basico/img/logo-whatsapp.png" width="24" height="24" alt=""></span>
             <span class="floating-contact__label">WhatsApp</span>

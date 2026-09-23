@@ -3,6 +3,7 @@ import { resolve, join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { DEMOS, renderDemo } from './demo-content.mjs';
 import { resolveOrigin } from './site-origin.mjs';
+import { canonicalRoute } from './demo-routes.mjs';
 
 const site = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const root = join(site, 'webs');
@@ -43,6 +44,7 @@ function icons(key, prefix='../') {
 <link rel="manifest" href="${path}/site.webmanifest">`;
 }
 function social(title, description, image, path) {
+  path = canonicalRoute(path);
   const absoluteImage = image && (/^https:\/\//.test(image) ? image : origin ? origin + image : '');
   return `${origin ? `<link rel="canonical" href="${origin}${path}"><meta property="og:url" content="${origin}${path}">` : ''}
 <meta property="og:type" content="website"><meta property="og:locale" content="es_AR">
@@ -79,9 +81,9 @@ function gymPage(name, description, body) {
 <nav class="nav" aria-label="Navegación principal"><a class="brand" href="../index.html"><span class="brand__mark" aria-hidden="true"></span><span class="brand__name">PULSO</span></a>
 <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="nav-menu" aria-label="Abrir menú"><span></span><span></span></button>
 <div class="nav__menu" id="nav-menu"><a href="../index.html">El club</a><a href="sedes.html"${name==='Sede'?' aria-current="page"':''}>Sede</a><a href="faqs.html"${name==='Preguntas frecuentes'?' aria-current="page"':''}>Preguntas</a><a href="contacto.html"${name==='Contacto'?' aria-current="page"':''}>Contacto</a></div>
-<a class="nav__cta" href="../../agencia/index.html#demo">Todas las demos ↗</a></nav>
+<a class="nav__cta" href="${wa}" target="_blank" rel="noopener">Quiero esta web ↗</a></nav>
 <main class="shell secondary-main" id="main"><p class="eyebrow">PULSO · Demo conceptual de TRAZA</p>${body}</main>
-<footer class="footer"><div class="shell footer__bottom"><p>© 2026 PULSO · Demo conceptual de TRAZA.</p><a href="../../agencia/index.html#demo">Volver al catálogo ↗</a></div><p class="demo-disclaimer shell">Marca, horarios, testimonios y ubicación ilustrativos. Las consultas se envían a TRAZA para crear una web; no se realizan reservas.</p></footer>
+<footer class="footer"><div class="shell footer__bottom"><p>© 2026 PULSO · Demo conceptual de TRAZA.</p><a href="../index.html">Volver a PULSO ↗</a></div><p class="demo-disclaimer shell">Marca, horarios, testimonios y ubicación ilustrativos. Las consultas se envían a TRAZA para crear una web; no se realizan reservas.</p></footer>
 <a class="floating-contact is-visible" href="${wa}" target="_blank" rel="noopener" aria-label="Consultar a TRAZA por la demo PULSO"><span class="floating-contact__icon" aria-hidden="true"><img src="../img/logo-whatsapp.png" width="24" height="24" alt=""></span><span class="floating-contact__label">WhatsApp</span></a>
 <script src="../script.js?v=${version}" defer></script>${name==='Contacto'?`<script src="../contacto.js?v=${version}" defer></script>`:''}</body></html>`;
 }
@@ -120,7 +122,7 @@ await copyFile(join(publicDir,'assets/icons/traza/favicon.ico'),join(publicDir,'
 await copyFile(join(publicDir,'assets/icons/traza/apple-touch-icon.png'),join(publicDir,'apple-touch-icon.png'));
 await output(join(publicDir,'robots.txt'),`User-agent: *\nAllow: /\nDisallow: /agencia/prospeccion.html\nDisallow: /PLAN_COMERCIAL.md\n${origin ? `Sitemap: ${origin}/sitemap.xml\n` : ''}`);
 const routes=['/agencia/index.html','/agencia/privacidad.html','/1_basico/index.html',...Object.keys(pages).map(p=>'/1_basico/pages/'+p),...Object.keys(DEMOS).map(k=>`/nichos/${k}.html`)];
-if(origin) await output(join(publicDir,'sitemap.xml'),`<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${routes.map(path=>`<url><loc>${origin}${path === '/agencia/index.html' ? '/' : path}</loc></url>`).join('')}</urlset>`);
+if(origin) await output(join(publicDir,'sitemap.xml'),`<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${routes.map(path=>`<url><loc>${origin}${path === '/agencia/index.html' ? '/' : canonicalRoute(path)}</loc></url>`).join('')}</urlset>`);
 else await unlink(join(publicDir,'sitemap.xml')).catch(e=>{if(e.code!=='ENOENT')throw e;});
 await output(join(publicDir,'404.html'),head('Página no encontrada — TRAZA','Volvé al catálogo de demos de TRAZA.','traza','/404.html',null,'<meta name="robots" content="noindex"><link rel="stylesheet" href="/agencia/styles.css">','/')+'<body><main class="shell privacy-page" id="main"><p class="eyebrow">TRAZA · 404</p><h1>Este camino<br>no lleva a una web.</h1><p>El enlace pudo cambiar. Encontrá tu próxima web en el catálogo.</p><a class="button button--accent" href="/agencia/index.html#demo">Explorar las demos ↗</a></main></body></html>');
 await output(join(publicDir,'_headers'),'/*\n  X-Content-Type-Options: nosniff\n  Referrer-Policy: strict-origin-when-cross-origin\n  Permissions-Policy: camera=(), microphone=(), geolocation=()\n  X-Frame-Options: SAMEORIGIN\n');

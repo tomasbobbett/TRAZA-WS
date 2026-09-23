@@ -24,12 +24,12 @@ test('the root renders the complete catalogue and all twelve demos can be shared
   assert.match(homepage, /src="\/assets\/motion.js/);
   assert.equal((homepage.match(/class="niche-demo /g) || []).length, 12);
   assert.doesNotMatch(homepage, /http-equiv="refresh"/);
-  assert.equal((await read('enlaces.txt')).split('\n').filter(line => /\/nichos\/.*\.html$/.test(line)).length, 11);
+  assert.equal((await read('enlaces.txt')).split('\n').filter(line => /\/demo\/[a-z]+\/$/.test(line)).length, 12);
 });
 
 test('only web assets are included in the published folder', async () => {
   const entries = await readdir(new URL('../public/', import.meta.url));
-  assert.deepEqual(entries.sort(), ['1_basico', '404.html', '_headers', 'agencia', 'apple-touch-icon.png', 'assets', 'enlaces.txt', 'favicon.ico', 'index.html', 'nichos', 'robots.txt', ...(entries.includes('sitemap.xml') ? ['sitemap.xml'] : [])].sort());
+  assert.deepEqual(entries.sort(), ['1_basico', '404.html', '_headers', 'agencia', 'apple-touch-icon.png', 'assets', 'demo', 'enlaces.txt', 'favicon.ico', 'index.html', 'nichos', 'robots.txt', ...(entries.includes('sitemap.xml') ? ['sitemap.xml'] : [])].sort());
   const files = await readdir(new URL('../public/', import.meta.url), { recursive: true });
   assert.equal(files.some(path => /(?:prospeccion|comercial|respaldo|node_modules|\.git|\.env|preview.*\.png)/i.test(path)), false);
   for (const file of files.filter(path => path.endsWith('.html'))) {

@@ -9,11 +9,18 @@ const types = { '.html': 'text/html; charset=utf-8', '.css': 'text/css; charset=
 createServer(async (request, response) => {
   try {
     if (!['GET', 'HEAD'].includes(request.method)) { response.writeHead(405).end(); return; }
-    const pathname = decodeURIComponent(new URL(request.url, 'http://localhost').pathname);
+    const requestedURL = new URL(request.url, 'http://localhost');
+    const pathname = decodeURIComponent(requestedURL.pathname);
     let file = resolve(root, '.' + pathname);
     if (!file.startsWith(root + sep) && file !== root) throw new Error('Outside public');
     const info = await stat(file);
-    if (info.isDirectory()) file = join(file, 'index.html');
+    if (info.isDirectory()) {
+      if (!pathname.endsWith('/')) {
+        response.writeHead(301, { Location: requestedURL.pathname + '/' + requestedURL.search }).end();
+        return;
+      }
+      file = join(file, 'index.html');
+    }
     file = await realpath(file);
     if (!file.startsWith(root + sep)) throw new Error('Outside public');
     const body = await readFile(file);
