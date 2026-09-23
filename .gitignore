@@ -3,6 +3,7 @@
 !/.gitignore
 !/.nvmrc
 !/README.md
+!/AGENTS.md
 !/netlify.toml
 !/package.json
 !/package-lock.json
