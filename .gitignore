@@ -37,3 +37,12 @@ __pycache__/
 **/preview*.png
 .DS_Store
 Thumbs.db
+
+# Base de clientes solicitada para este repositorio; permitir solo la entrega.
+!/clientes-potenciales/
+/clientes-potenciales/**
+!/clientes-potenciales/README.md
+!/clientes-potenciales/outputs/
+!/clientes-potenciales/outputs/01a0cff8-13b4-7322-9bd9-a6324b15e118/
+!/clientes-potenciales/outputs/01a0cff8-13b4-7322-9bd9-a6324b15e118/prospectos_globales_2026-09-23.xlsx
+!/clientes-potenciales/outputs/01a0cff8-13b4-7322-9bd9-a6324b15e118/prospectos_globales_2026-09-23.csv

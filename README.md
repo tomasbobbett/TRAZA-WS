@@ -29,4 +29,4 @@ Cada rubro tiene una página independiente en `/demo/<rubro>/`. Por ejemplo, `/d
 
 PULSO también tiene contacto, preguntas y sede dentro de `/demo/gimnasio/`. Las páginas comparten recursos visuales para mantener las animaciones y evitar duplicar imágenes. `scripts/demo-routes.mjs` define las direcciones; `public/` debe publicarse completo.
 
-Este repositorio contiene únicamente el sitio y sus herramientas de publicación.
+La [base de clientes potenciales](clientes-potenciales/README.md) contiene la planilla comercial actualizada con negocios, rubros y contactos públicos de distintos países. Se versiona junto al proyecto y queda fuera de la web publicada.
