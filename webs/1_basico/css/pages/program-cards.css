@@ -1,0 +1,195 @@
+/* PULSO-only preview: the three training cards. */
+.programs__grid.programs__grid--editorial {
+    height: auto;
+    min-height: 0;
+    gap: 20px;
+    align-items: stretch;
+}
+
+.program-card.program-card--editorial {
+    --card-bg: #141414;
+    --card-ink: var(--paper);
+    display: flex;
+    min-width: 0;
+    min-height: 0;
+    flex-direction: column;
+    background: var(--card-bg);
+    color: var(--card-ink);
+    border: 1px solid rgba(255, 255, 255, .16);
+}
+
+.program-card--editorial.program-card--performance {
+    --card-bg: #141414;
+    --card-ink: var(--paper);
+}
+
+.program-card--editorial.program-card--personal {
+    --card-bg: #141414;
+}
+
+.program-card--editorial .program-card__top {
+    display: flex;
+    min-height: 60px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 18px 26px;
+    font-size: .62rem;
+    font-weight: 800;
+    letter-spacing: .08em;
+    line-height: 1.5;
+    text-transform: uppercase;
+}
+
+.program-card__top > :last-child {
+    text-align: right;
+    color: #b8b8b1;
+}
+
+.program-card--editorial .program-card__top > :first-child,
+.program-card--editorial .program-card__link i {
+    color: var(--lime);
+}
+
+.program-card--editorial .program-card__photo {
+    position: relative;
+    aspect-ratio: 1.35;
+    overflow: hidden;
+    background: #151713;
+}
+
+.program-card--editorial .program-card__photo img {
+    position: absolute;
+    z-index: auto;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    filter: saturate(.5);
+    transform: none;
+    transition: transform 650ms cubic-bezier(.22, 1, .36, 1), filter 650ms ease;
+}
+
+.program-card--performance .program-card__photo img {
+    object-position: 60% center;
+}
+
+.program-card--editorial .program-card__content {
+    position: relative;
+    inset: auto;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    padding: 28px 26px 24px;
+    transform: none;
+}
+
+.program-card--editorial .program-card__content h3 {
+    margin: 0 0 16px;
+    font-size: clamp(2.4rem, 13.4cqi, 4.9rem);
+    letter-spacing: -.025em;
+    line-height: 1;
+}
+
+.program-card--editorial:nth-child(2) .program-card__content h3 {
+    font-size: clamp(2rem, 11.8cqi, 4.3rem);
+    letter-spacing: -.035em;
+    white-space: normal;
+}
+
+.program-card--editorial .program-card__content .program-card__description {
+    margin: 0 0 28px;
+    color: #b8b8b1;
+    font-size: .88rem;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: 1.7;
+    text-transform: none;
+}
+
+.program-card--editorial .program-card__link {
+    display: flex;
+    margin-top: auto;
+    min-height: 46px;
+    padding-top: 16px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    border-top: 1px solid color-mix(in srgb, var(--card-ink) 25%, transparent);
+    color: inherit;
+    font-size: .65rem;
+    font-weight: 800;
+    letter-spacing: .075em;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.program-card--editorial .program-card__link span {
+    display: inline;
+    border: 0;
+    padding: 0;
+    font: inherit;
+    letter-spacing: inherit;
+}
+
+.program-card--editorial .program-card__link:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 5px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .program-card--editorial:hover .program-card__photo img {
+        transform: scale(1.045);
+        filter: saturate(1);
+    }
+}
+
+@media (max-width: 900px) {
+    .programs__grid.programs__grid--editorial {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        grid-auto-flow: row;
+        gap: 12px;
+        overflow: visible;
+        scroll-snap-type: none;
+    }
+
+    .program-card--editorial .program-card__top,
+    .program-card--editorial .program-card__content {
+        padding-inline: 18px;
+    }
+
+    .program-card--editorial .program-card__content h3 {
+        font-size: 13.4cqi;
+    }
+
+    .program-card--editorial:nth-child(2) .program-card__content h3 {
+        font-size: 11.8cqi;
+    }
+}
+
+@media (max-width: 680px) {
+    .programs__grid.programs__grid--editorial {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 24px;
+    }
+
+    .program-card--editorial .program-card__photo {
+        aspect-ratio: 1.5;
+    }
+
+    .program-card--editorial .program-card__top,
+    .program-card--editorial .program-card__content {
+        padding-inline: 24px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .program-card--editorial .program-card__photo img {
+        transition: none;
+    }
+
+    .program-card--editorial:hover .program-card__photo img {
+        transform: none;
+    }
+}
