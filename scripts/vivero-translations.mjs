@@ -60,6 +60,7 @@ Hagamos lugar | Make room | Vamos abrir espaço
 a lo que viene. | for what's next. | para o que vem.
 Para cotizar con claridad, empecemos por los datos que importan. | For a clear quote, let's start with the details that matter. | Para um orçamento claro, vamos começar pelos dados que importam.
 Empezar mi consulta | Start my inquiry | Iniciar minha consulta
+Herramientas y sustrato para preparar una plantación, fotografía ilustrativa | Tools and potting soil to prepare for planting, illustrative photograph | Ferramentas e substrato para preparar um plantio, fotografia ilustrativa
 Contanos tu proyecto | Tell us about your project | Conte seu projeto
 Tipo de comprador, zona de plantación, especies y cantidad aproximada. Podés consultar aunque todavía estés definiendo los detalles. | Buyer type, planting area, species and approximate quantity. You can inquire while you are still working out the details. | Tipo de comprador, região de plantio, espécies e quantidade aproximada. Você pode consultar mesmo enquanto define os detalhes.
 Confirmemos la propuesta | Confirm the proposal | Vamos confirmar a proposta
@@ -114,6 +115,8 @@ El Torno. | El Torno. | El Torno.
 Bolivia. | Bolivia. | Bolívia.
 Vivero la Loma · 2J5J+7W, El Torno, Bolivia | Vivero la Loma · 2J5J+7W, El Torno, Bolivia | Vivero la Loma · 2J5J+7W, El Torno, Bolívia
 Coordinar una visita | Arrange a visit | Agendar uma visita
+Ubicación de Vivero la Loma en El Torno, Bolivia | Location of Vivero la Loma in El Torno, Bolivia | Localização do Vivero la Loma em El Torno, Bolívia
+2J5J+7W · El Torno, Bolivia | 2J5J+7W · El Torno, Bolivia | 2J5J+7W · El Torno, Bolívia
 Una conversación. | One conversation. | Uma conversa.
 Muchas posibilidades. | Many possibilities. | Muitas possibilidades.
 Antes de visitarnos, confirmá el horario y las plantas que te interesan por WhatsApp. | Before visiting, confirm opening hours and the plants you are interested in via WhatsApp. | Antes da visita, confirme pelo WhatsApp o horário e as plantas do seu interesse.

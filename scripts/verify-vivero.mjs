@@ -29,7 +29,7 @@ try {
             await page.waitForTimeout(200);
             const layout = await page.evaluate(() => {
                 const outside = [];
-                for (const el of document.querySelectorAll('h1,h2,h3,.plant-info,.catalog-filters,.hero-metrics,.nav-actions')) {
+                for (const el of document.querySelectorAll('h1,h2,h3,.plant-info,.catalog-filters,.hero-metrics,.nav-actions,.nursery-steps li,.nursery-map,.nursery-map-caption')) {
                     const rect = el.getBoundingClientRect();
                     if (rect.right > innerWidth + 1 || rect.left < -1 || el.scrollWidth > el.clientWidth + 1) outside.push(el.className || el.tagName);
                 }
@@ -138,8 +138,19 @@ try {
     assert.ok(await page.locator('#preguntas details').first().getAttribute('open') !== null);
     const map = new URL(await page.locator('a[href*="google.com/maps"]').getAttribute('href'));
     assert.equal(map.searchParams.get('query'), '2J5J+7W, El Torno, Bolivia');
+    const embeddedMap = new URL(await page.locator('.nursery-map iframe').getAttribute('src'));
+    assert.equal(embeddedMap.searchParams.get('q'), map.searchParams.get('query'));
+    assert.equal(embeddedMap.searchParams.get('output'), 'embed');
     await page.emulateMedia({ reducedMotion: 'reduce' });
     await page.reload({ waitUntil: 'networkidle' });
+    for (const [device,width,height] of [['desktop',1440,1000],['mobile',390,844]]) {
+        await page.setViewportSize({width,height});
+        for (const id of ['experiencia','visitanos']) {
+            await page.locator(`#${id}`).scrollIntoViewIfNeeded();
+            await page.waitForTimeout(1000);
+            await page.locator(`#${id}`).screenshot({path:`${output}/${id}-${device}.png`});
+        }
+    }
     await page.locator('h1').scrollIntoViewIfNeeded();
     await page.waitForFunction(() => getComputedStyle(document.querySelector('h1')).opacity === '1');
     assert.equal(await page.locator('.motion-control,.motion-toggle').count(), 0);
