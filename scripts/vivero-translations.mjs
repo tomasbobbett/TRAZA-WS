@@ -1,4 +1,17 @@
 const rows = `
+* Datos obligatorios. Nada se envía automáticamente. | * Required fields. Nothing is sent automatically. | * Dados obrigatórios. Nada é enviado automaticamente.
+Propuestas por tipo de cliente | Proposals by buyer type | Propostas por tipo de cliente
+Anterior | Previous | Anterior
+Siguiente | Next | Próximo
+Especies frutales | Fruit tree species | Espécies frutíferas
+Cómo realizar tu pedido | How to place your order | Como fazer seu pedido
+Continuar | Continue | Continuar
+← Editar datos | ← Edit details | ← Editar dados
+Elegí una pregunta | Choose a question | Escolha uma pergunta
+Paso {step} de 4 | Step {step} of 4 | Etapa {step} de 4
+Tu pedido | Your order | Seu pedido
+Tus frutales | Your fruit trees | Suas frutíferas
+Últimos detalles | Final details | Últimos detalhes
 Vivero | Nursery | Viveiro
 la Loma | la Loma | la Loma
 Frutales | Fruit trees | Frutíferas
@@ -136,4 +149,4 @@ export const nurseryTranslations = Object.fromEntries(rows.trim().split('\n').ma
     if (!es || !en || !pt || extra) throw new Error(`Invalid nursery translation: ${row}`);
     return [es, [en, pt]];
 }));
-export const nurseryDynamicCopy = ['A definir', 'Hola, quisiera una cotización de plantas frutales injertadas de Vivero la Loma.', 'Nombre', 'Tipo de comprador', 'Destino de plantación', 'Frutales de interés', 'Detalles del proyecto', 'Por favor, confirmar variedades, disponibilidad, precios y condiciones de retiro o entrega.', 'Tu consulta está lista. Revisala y continuá a WhatsApp para enviarla.'];
+export const nurseryDynamicCopy = ['Paso {step} de 4', 'Tus frutales', 'Tu pedido', 'Últimos detalles', 'A definir', 'Hola, quisiera una cotización de plantas frutales injertadas de Vivero la Loma.', 'Nombre', 'Tipo de comprador', 'Destino de plantación', 'Frutales de interés', 'Detalles del proyecto', 'Por favor, confirmar variedades, disponibilidad, precios y condiciones de retiro o entrega.', 'Tu consulta está lista. Revisala y continuá a WhatsApp para enviarla.'];
