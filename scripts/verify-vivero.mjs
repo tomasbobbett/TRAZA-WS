@@ -39,6 +39,7 @@ try {
         });
         report.layouts.push({ ...context, ...layout });
         assert.deepEqual(layout, { oversized: [], overflow: 0, clipped: [], offCenter: [] }, JSON.stringify(context));
+        assert.equal(await page.locator('h1').evaluate(el => getComputedStyle(el).textAlign), 'left');
     }
     const sizes = [[1920,1080],[1440,900],[1366,768],[1366,650],[1280,560],[1024,768],[768,1024],[390,844],[360,640],[320,568],[844,390]];
     for (const language of ['es', 'en', 'pt']) {
@@ -141,6 +142,7 @@ try {
     assert.deepEqual(broken, []);
     await page.emulateMedia({ reducedMotion: 'reduce' });
     await page.reload({waitUntil:'networkidle'});
+    await page.locator('#inicio').evaluate(el=>el.scrollIntoView({block:'start',behavior:'instant'}));
     await page.waitForFunction(()=>getComputedStyle(document.querySelector('h1')).opacity==='1');
     const noJS = await browser.newPage({javaScriptEnabled:false,viewport:{width:390,height:844}});
     await noJS.goto(`${base}/demo/vivero/`);
