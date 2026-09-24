@@ -11,7 +11,7 @@ const publicDir = join(site, 'public');
 const config = JSON.parse(await readFile(join(site, 'site.config.json'), 'utf8'));
 const origin = resolveOrigin(config);
 const version = '20260924-clean-headings';
-const nurseryVersion = '20260924-process-location';
+const nurseryVersion = '20260924-smooth-scroll';
 const exists = async p => stat(p).then(() => true, () => false);
 const esc = s => String(s).replaceAll('&', '&amp;').replaceAll('"', '&quot;').replaceAll('<', '&lt;').replaceAll('>', '&gt;');
 async function output(path, text) { await mkdir(dirname(path), { recursive: true }); await writeFile(path, text); }
@@ -69,9 +69,9 @@ ${extra}</head>`;
 for (const [key, demo] of Object.entries(DEMOS)) {
   const title = `${demo.brand} — ${demo.label.split(' · ')[0]} | Demo TRAZA`;
   const description = `Demo conceptual de ${demo.brand}. ${demo.description}`;
-  const html = head(title,description,key,`/nichos/${key}.html`,demo.heroImage,`<link rel="stylesheet" href="${key === 'vivero' ? 'vivero-base' : 'demo'}.css?v=${version}">${key === 'vivero' ? `<link rel="stylesheet" href="vivero.css?v=${nurseryVersion}">` : ''}<link rel="stylesheet" href="../assets/whatsapp.css?v=20260910-traza">`)
+  const html = head(title,description,key,`/nichos/${key}.html`,demo.heroImage,`<link rel="stylesheet" href="${key === 'vivero' ? 'vivero-base' : 'demo'}.css?v=${version}">${key === 'vivero' ? `<link rel="stylesheet" href="../assets/vendor/lenis-1.3.26/lenis.css"><link rel="stylesheet" href="vivero.css?v=${nurseryVersion}">` : ''}<link rel="stylesheet" href="../assets/whatsapp.css?v=20260910-traza">`)
     .replace('<meta name="theme-color" content="#080b12">', `<meta name="theme-color" content="${({blush:'#2e2223',clinic:'#0b2930',fire:'#1e0c08',estate:'#17241c',legal:'#0c182a',garage:'#0c0c0c',vet:'#24372a',academy:'#15225d',home:'#0d2d3c',event:'#110512',stay:'#25261f',garden:'#172e23'})[demo.theme]}">`)
-    + `<body data-demo="${key}" class="theme-${demo.theme} layout-${demo.layout}">${renderDemo(demo,config.whatsapp)}<script src="demo.js?v=${version}" defer></script>${key === 'vivero' ? `<script src="vivero.js?v=${nurseryVersion}" defer></script>` : ''}</body></html>`;
+    + `<body data-demo="${key}" class="theme-${demo.theme} layout-${demo.layout}">${renderDemo(demo,config.whatsapp)}<script src="demo.js?v=${version}" defer></script>${key === 'vivero' ? `<script src="../assets/vendor/lenis-1.3.26/lenis.min.js" defer></script><script src="vivero.js?v=${nurseryVersion}" defer></script>` : ''}</body></html>`;
   await output(join(publicDir, 'nichos', `${key}.html`),html);
 }
 

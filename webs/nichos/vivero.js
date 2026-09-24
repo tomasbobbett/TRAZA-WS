@@ -1,3 +1,49 @@
+// Smooth wheel input; touch, keyboard, anchors and inner fields stay native.
+(() => {
+    if (!window.Lenis || document.body.dataset.demo !== 'vivero') return;
+    const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+    const dialog = document.querySelector('.nursery-result');
+    let scroll;
+
+    const syncLock = () => {
+        if (!scroll) return;
+        if (document.body.classList.contains('menu-open') || dialog?.open) scroll.stop();
+        else scroll.start();
+    };
+    const setup = () => {
+        scroll?.destroy();
+        scroll = null;
+        document.documentElement.dataset.motion = reducedMotion.matches ? 'reduced' : 'full';
+        if (reducedMotion.matches) return;
+        scroll = new Lenis({
+            autoRaf: true,
+            lerp: 0.12,
+            smoothWheel: true,
+            syncTouch: false,
+            anchors: false,
+            prevent: node => node.matches('dialog, textarea, select, input, .nav-links, .language-dropdown'),
+        });
+        syncLock();
+    };
+    setup();
+    reducedMotion.addEventListener('change', setup);
+    const locks = new MutationObserver(syncLock);
+    locks.observe(document.body, { attributes: true, attributeFilter: ['class'] });
+    if (dialog) locks.observe(dialog, { attributes: true, attributeFilter: ['open'] });
+
+    // Cancel remaining wheel momentum before the browser handles another input.
+    // Native links retain their URL, focus, back-button and scroll-padding behavior.
+    document.addEventListener('click', event => {
+        if (event.target.closest('a[href]')) { syncLock(); scroll?.reset(); }
+    });
+    addEventListener('pointerdown', () => scroll?.reset(), { passive: true });
+    addEventListener('keydown', event => {
+        if (['Tab', 'ArrowUp', 'ArrowDown', 'PageUp', 'PageDown', 'Home', 'End', ' '].includes(event.key)) scroll?.reset();
+    });
+    addEventListener('popstate', () => scroll?.reset());
+    document.addEventListener('visibilitychange', () => { if (document.hidden) scroll?.reset(); });
+})();
+
 (() => {
     const form = document.getElementById('nursery-quote');
     if (!form) return;
