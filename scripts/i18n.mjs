@@ -58,7 +58,7 @@ export async function addTranslations(output) {
     const copy = Object.fromEntries(Object.entries(dictionary).filter(([key]) => strings.has(key) || dynamicCopy.includes(key)));
     const prefix = source.startsWith('/1_basico/pages/') ? '../../' : '../';
     const data = JSON.stringify(copy).replaceAll('<', '\\u003c');
-    html = html.replace('</head>', `<link rel="stylesheet" href="${prefix}assets/languages.css?v=20260923">\n<script id="demo-translations" type="application/json">${data}</script>\n<script src="${prefix}assets/languages.js?v=20260923" defer></script>\n</head>`);
+    html = html.replace('</head>', `<link rel="stylesheet" href="${prefix}assets/languages.css?v=20260924-dropdown">\n<script id="demo-translations" type="application/json">${data}</script>\n<script src="${prefix}assets/languages.js?v=20260924-dropdown" defer></script>\n</head>`);
     // Put i18n before motion and page scripts so every dynamic label can use it.
     const motion = html.match(/<script[^>]+src="[^"]*assets\/motion.js[^"]*"[^>]*><\/script>/)?.[0];
     if (motion) html = html.replace(motion, '').replace('</head>', `${motion}\n</head>`);

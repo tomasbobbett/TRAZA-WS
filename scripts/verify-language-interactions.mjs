@@ -11,10 +11,25 @@ try {
     const page = await context.newPage();
     const errors = [];
     page.on('pageerror', e => errors.push(e.message));
+    const chooseLanguage = async lang => {
+        await page.locator('.language-trigger').click();
+        await page.locator(`.language-option[data-language="${lang}"]`).click();
+        assert.equal(await page.locator('.language-current').textContent(), lang.toUpperCase());
+        assert.equal(await page.locator('.language-trigger').getAttribute('aria-expanded'), 'false');
+        assert.equal(await page.locator('.language-dropdown').isVisible(), false);
+    };
     await page.goto(base + '/demo/gimnasio/?lang=en');
-    await page.locator('button[data-language="pt"]').focus();
+    assert.equal(await page.locator('.language-current').textContent(), 'EN');
+    assert.equal(await page.locator('.language-dropdown').isVisible(), false);
+    await page.locator('.language-trigger').focus();
+    await page.keyboard.press('ArrowDown');
+    assert.equal(await page.locator('.language-dropdown').isVisible(), true);
+    assert.equal(await page.evaluate(() => document.activeElement.dataset.language), 'en');
+    await page.keyboard.press('ArrowDown');
     await page.keyboard.press('Enter');
     assert.equal(await page.locator('html').getAttribute('lang'), 'pt-BR');
+    assert.equal(await page.locator('.language-trigger').getAttribute('aria-expanded'), 'false');
+    assert.equal(await page.evaluate(() => document.activeElement.className), 'language-trigger');
     await page.reload();
     assert.equal(await page.locator('html').getAttribute('lang'), 'pt-BR');
     await page.goto(base + '/demo/estetica/');
@@ -22,6 +37,26 @@ try {
     await page.goto(base + '/demo/gimnasio/?lang=en');
     assert.equal(await page.locator('html').getAttribute('lang'), 'en');
     ok('Keyboard selection, reload, cross-demo persistence and explicit URL priority');
+
+    await page.locator('.language-trigger').click();
+    await page.keyboard.press('End');
+    assert.equal(await page.evaluate(() => document.activeElement.dataset.language), 'pt');
+    await page.keyboard.press('Home');
+    assert.equal(await page.evaluate(() => document.activeElement.dataset.language), 'es');
+    await page.keyboard.press('Escape');
+    assert.equal(await page.locator('.language-dropdown').isVisible(), false);
+    assert.equal(await page.evaluate(() => document.activeElement.className), 'language-trigger');
+    await page.locator('.language-trigger').click();
+    await page.keyboard.press('End');
+    await page.keyboard.press('Tab');
+    assert.equal(await page.locator('.language-dropdown').isVisible(), false);
+    await page.locator('.nav__toggle').click();
+    await page.locator('.language-trigger').click();
+    assert.equal(await page.locator('.nav__toggle').getAttribute('aria-expanded'), 'false');
+    assert.equal(await page.locator('.language-dropdown').isVisible(), true);
+    await page.locator('h1').click();
+    assert.equal(await page.locator('.language-dropdown').isVisible(), false);
+    ok('Dropdown closes on selection, Escape, Tab and outside click; mobile menus do not overlap');
 
     await page.locator('#openGaleria').click();
     assert.equal(await page.locator('#galeriaModal').getAttribute('aria-hidden'), 'false');
@@ -34,7 +69,7 @@ try {
 
     const motion = page.locator('.motion-control');
     await motion.click();
-    await page.locator('button[data-language="pt"]').click();
+    await chooseLanguage('pt');
     assert.equal(await motion.textContent(), 'Ativar movimento');
     assert.equal(await motion.getAttribute('aria-pressed'), 'true');
     await motion.click();
@@ -44,7 +79,7 @@ try {
 
     await page.goto(base + '/demo/gimnasio/faqs/?lang=en');
     await page.locator('summary').first().click();
-    await page.locator('button[data-language="pt"]').click();
+    await chooseLanguage('pt');
     assert.equal(await page.locator('details').first().getAttribute('open'), '');
     assert.equal((await page.locator('summary').first().textContent()).trim(), 'Preciso de experiência para começar?');
     ok('FAQ answer remains open while changing language');
@@ -56,8 +91,8 @@ try {
         await page.locator('#contact-name').fill('Ana & <Studio>');
         await page.locator('#contact-business').fill('Gym + Club');
         await page.locator('#contact-message').fill('Consulta de prueba / keep my words {name}');
-        await page.locator('button[data-language="en"]').click();
-        await page.locator(`button[data-language="${lang}"]`).click();
+        await chooseLanguage('en');
+        await chooseLanguage(lang);
         assert.equal(await page.locator('#contact-name').inputValue(), 'Ana & <Studio>');
         assert.equal(await page.locator('#contact-message').inputValue(), 'Consulta de prueba / keep my words {name}');
         let prepared;
