@@ -1,33 +1,33 @@
 # Clientes potenciales de TRAZA
 
-Actualización: **23 de septiembre de 2026**. Base de **72 negocios de 36 países**, con representación de América, Europa, África, Asia y Oceanía.
+Actualización: **24 de septiembre de 2026**. Selección corregida de **20 negocios de 16 países y 5 continentes**, orientada a vender una **primera web**.
 
-- [Descargar la planilla Excel](outputs/01a0cff8-13b4-7322-9bd9-a6324b15e118/prospectos_globales_2026-09-23.xlsx)
-- [Ver la misma lista en CSV](outputs/01a0cff8-13b4-7322-9bd9-a6324b15e118/prospectos_globales_2026-09-23.csv)
+- [Descargar la planilla Excel](outputs/01a0cff8-13b4-7322-9bd9-a6324b15e118/prospectos_sin_web_2026-09-24.xlsx)
+- [Consultar la misma lista en CSV](outputs/01a0cff8-13b4-7322-9bd9-a6324b15e118/prospectos_sin_web_2026-09-24.csv)
 
-## Contenido
+## Corrección del criterio
 
-Cada negocio ocupa una fila con rubro, país, ciudad, email o teléfono público, enlace de contacto, idioma sugerido, propuesta concreta, evidencia, fuentes y fecha de consulta. El Excel incluye filtros, encabezados fijos, prioridades y campos editables para registrar contactos y seguimiento. Las fuentes forman parte de la misma tabla y se mantienen junto al negocio al ordenar.
+La entrega anterior incluía negocios que ya tenían web y no servía como lista para vender una primera página. Esta versión la reemplaza: retira 67 registros, conserva 5 que pasaron la revisión y suma 15 candidatos nuevos. La lista anterior queda en el historial del repositorio y se conserva una copia local.
 
-La hoja **Guía y mensajes** explica cómo usar la lista, conserva las categorías de mensajes de la base anterior y suma modelos en francés e italiano. La cobertura por país y continente se calcula desde la lista principal.
+Solo se incluyen negocios para los que **no se encontró un sitio propio** al buscar su nombre, localidad y variantes o datos de contacto, contrastando fuentes públicas. Se excluyeron los candidatos con sitio propio encontrado, dominios históricos sin aclarar, identidad insuficiente o cierre declarado. No se dedujo ausencia de web únicamente porque un directorio no la declare.
 
-## Alcance de la actualización
+“Sin web propia encontrada” describe el resultado de la investigación; **no equivale a una confirmación del dueño**. Una web nueva o no indexada puede no aparecer. Algunos negocios tienen Facebook, Instagram, directorios o fichas de reserva en plataformas de terceros. Las limitaciones de acceso y las diferencias entre fuentes se detallan por negocio.
 
-Se incorporaron **40 negocios nuevos** de 20 países fuera de América. Se conservaron los **32 registros anteriores**, incluyendo las correcciones de la revisión del 10/09/2026, y se reconsultaron las fuentes de 10 de ellos. Por tanto, **50 filas tienen fuentes consultadas el 23/09/2026** y 22 conservan la fecha anterior. Una consulta a una fuente no confirma actividad, respuesta, presupuesto ni interés comercial del negocio.
+## Cómo usarla
 
-| Prioridad | Negocios | Uso |
-| --- | ---: | --- |
-| Alta | 11 | Contacto oficial y una mejora concreta para conversar. |
-| Media | 37 | Buen encaje posible; confirmar necesidad y responsable. |
-| Revalidar | 22 | Actividad, identidad o datos pendientes. |
-| No priorizar | 2 | Casos de menor encaje conservados de la base anterior. |
+Cada fila reúne negocio, rubro, país, ciudad, teléfono público, email cuando está disponible y un enlace para contactar. También incluye una propuesta de primera web, evidencia, búsquedas realizadas, dos fuentes y la fecha de revisión. Las fuentes permanecen junto al negocio al filtrar y ordenar.
 
-Las propuestas de servicio son hipótesis comerciales, separadas de las observaciones. No se presenta la ausencia de una web en un directorio como prueba de que el negocio no tenga sitio. Las páginas cuya apertura fue limitada se identifican como contenido consultado en el índice del buscador. Las fuentes y limitaciones específicas están en cada fila.
+El Excel conserva los filtros, los encabezados fijos y los campos editables de seguimiento. En **Guía y mensajes** se explica el criterio y se adaptaron las aperturas de conversación a una primera web. Los resúmenes por país y continente se calculan desde la lista.
 
-El enlace **Contactar** abre email, llamada, WhatsApp publicado o una página oficial según el registro. No se enviaron mensajes. El teléfono no implica WhatsApp salvo indicación expresa de la fuente. Antes de preparar una propuesta, confirmar el canal, la actividad y quién decide.
+- **Alta (8):** primera tanda en español.
+- **Media (12):** mercados de otros idiomas.
 
-## Conservación y publicación
+La prioridad es un orden de contacto, no una estimación de compra ni de interés. Primero confirmar si el negocio actualmente tiene una web propia; si comparte una, marcar **Ya tiene web** y descartarlo de esta campaña.
 
-Esta carpeta contiene únicamente la base comercial que se pidió subir al repositorio. No incluye presupuestos, archivos de trabajo ni otros materiales de `TRAZA-PRIVADO`. Las fuentes originales se conservaron localmente. No se incorporan estos archivos a `webs/` ni a la salida pública de Netlify.
+Todos los registros tienen teléfono comercial publicado. El botón de contacto abre email, llamada, WhatsApp declarado o Instagram. No se enviaron mensajes ni se probaron números. La fecha de revisión es la consulta realizada el 24/09/2026, no la fecha en que el negocio actualizó sus datos; algunas fuentes solo pudieron consultarse en el índice del buscador.
 
-El CSV facilita revisar cambios en GitHub; el Excel es la versión para trabajar. Los dos archivos contienen los mismos 72 negocios e identificadores. Validación realizada: datos y fuentes conciliados fila por fila, 72 enlaces de contacto, filtros, paneles fijos, recálculo de resúmenes y revisión visual de las dos hojas.
+## Validación y publicación
+
+Se conciliaron las 20 filas entre Excel y CSV, sus identificadores y las fuentes. Se verificaron 20 enlaces de contacto, 40 enlaces de fuentes, filtros, paneles fijos, recálculo de resúmenes y el formato de las dos hojas. Los cinco registros conservados mantienen sus identificadores y campos de seguimiento.
+
+Esta carpeta contiene la entrega comercial solicitada para el repositorio. Los archivos de investigación y la copia anterior se conservan en `TRAZA-PRIVADO`. Los archivos comerciales quedan fuera de `webs/` y de la web publicada.
