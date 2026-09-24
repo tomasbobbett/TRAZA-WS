@@ -34,9 +34,6 @@ img { max-width:100%; }
 .demo-disclaimer { padding-block:24px; margin-block:0; font-size:.75rem; line-height:1.7; opacity:.8; }
 
 
-.marquee { position:relative; padding-bottom:36px; }
-.motion-toggle { position:absolute; right:16px; bottom:3px; min-height:32px; border:0; padding:4px 10px; background:var(--dark); color:#fff; font:600 .65rem var(--body); cursor:pointer; }
-.motion-paused *, .motion-paused *::before, .motion-paused *::after { animation-play-state:paused!important; }
 .hero h1, .section-title, .service-card h3 { overflow-wrap:break-word; }
 .intro-grid > *, .story-content, .service-card { min-width:0; }
 .section .section-title em { color:var(--ink); }

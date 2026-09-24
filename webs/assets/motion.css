@@ -1,4 +1,4 @@
-/* Motion is a deliberate part of these demos; the page control pauses it.
+/* Motion is a deliberate part of these demos.
    No scroll interception or snapping; entry and hover use separate properties. */
 html { scroll-snap-type:none!important; scroll-padding-top:100px; }
 html.motion-ready .reveal { opacity:1; filter:none!important; will-change:auto; }
@@ -7,10 +7,6 @@ html.motion-ready .reveal[data-reveal="entering"] { will-change:opacity,translat
 .motion-parallax { translate:0 var(--motion-y,0px); scale:1.075; }
 .hero-media, .hero__media, .story-media, .final-cta__media { overflow:hidden; }
 .tilt, .niche-demo, .program-card, .image-card { transform-style:preserve-3d; }
-.marquee, .ticker { position:relative; }
-.motion-control { position:absolute; right:12px; bottom:3px; z-index:5; min-height:32px; border:1px solid rgba(255,255,255,.25); border-radius:3px; padding:5px 10px; background:#111b; color:#fff; font:600 11px/1.2 Arial,sans-serif; letter-spacing:.03em; cursor:pointer; }
-.motion-control:hover { background:#111; }
-.motion-control:focus-visible { outline:2px solid #fff; outline-offset:3px; }
 html[data-motion="reduced"] *, html[data-motion="reduced"] *::before, html[data-motion="reduced"] *::after { animation-play-state:paused!important; }
 html[data-motion="reduced"] { scroll-behavior:auto; }
 html[data-motion="reduced"] .motion-parallax { translate:none; }

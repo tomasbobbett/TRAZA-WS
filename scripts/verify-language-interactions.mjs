@@ -67,15 +67,10 @@ try {
     assert.equal(await page.evaluate(() => document.activeElement.id), 'openGaleria');
     ok('Translated gallery, close action and restored keyboard focus');
 
-    const motion = page.locator('.motion-control');
-    await motion.click();
     await chooseLanguage('pt');
-    assert.equal(await motion.textContent(), 'Ativar movimento');
-    assert.equal(await motion.getAttribute('aria-pressed'), 'true');
-    await motion.click();
-    assert.equal(await motion.textContent(), 'Pausar movimento');
+    assert.equal(await page.locator('.motion-control, .motion-toggle').count(), 0);
     assert.equal(await page.locator('.ticker__track').evaluate(el => getComputedStyle(el).animationPlayState), 'running');
-    ok('Motion state retained across language switches, translated controls and running animation');
+    ok('Carousel keeps running across language switches without a pause control');
 
     await page.goto(base + '/demo/gimnasio/faqs/?lang=en');
     await page.locator('summary').first().click();

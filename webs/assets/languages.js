@@ -23,7 +23,7 @@
     const walker = document.createTreeWalker(document.documentElement, NodeFilter.SHOW_TEXT);
     while (walker.nextNode()) {
         const node = walker.currentNode;
-        if (node.parentElement.closest('script, style, noscript, .motion-toggle, .motion-control')) continue;
+        if (node.parentElement.closest('script, style, noscript')) continue;
         const source = normalize(node.nodeValue);
         if (Object.hasOwn(dictionary, source)) {
             const before = node.nodeValue.match(/^\s*/)[0], after = node.nodeValue.match(/\s*$/)[0];
@@ -31,7 +31,7 @@
         }
     }
     for (const element of document.querySelectorAll('[alt], [title], [placeholder], [aria-label], meta[content]')) {
-        if (element.matches('.menu-button, .nav__toggle, .motion-toggle, .motion-control')) continue;
+        if (element.matches('.menu-button, .nav__toggle')) continue;
         for (const attribute of ['alt', 'title', 'placeholder', 'aria-label', ...(element.tagName === 'META' ? ['content'] : [])]) {
             const source = element.getAttribute(attribute);
             if (source && Object.hasOwn(dictionary, normalize(source))) bindings.push(() => element.setAttribute(attribute, t(normalize(source))));

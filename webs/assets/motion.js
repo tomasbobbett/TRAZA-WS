@@ -2,16 +2,13 @@
 (() => {
     'use strict';
     const root = document.documentElement;
-    let saved;
-    try { saved = sessionStorage.getItem('traza-motion'); } catch { /* Motion works without storage. */ }
-    root.dataset.motion = saved === 'reduced' ? 'reduced' : 'full';
+    root.dataset.motion = 'full';
     root.classList.add('motion-ready');
     const state = { get matches() { return root.dataset.motion === 'reduced'; } };
     window.TrazaMotion = state;
     const finePointer = matchMedia('(hover: hover) and (pointer: fine)');
     const mobile = matchMedia('(max-width: 760px)');
     const ease = 'cubic-bezier(.16,1,.3,1)';
-    const entryAnimations = new Set();
 
     // Animate entry separately from transform so hover, tilt and layout offsets
     // never fight over the same property. Release the animation after it finishes.
@@ -34,12 +31,10 @@
             { opacity: 0, translate: `0 ${distance}px` },
             { opacity: 1, translate: '0 0' }
         ], { duration: reduced ? 180 : 900, delay, easing: ease, fill: 'both' });
-        entryAnimations.add(animation);
         animation.finished.then(() => {
             element.dataset.reveal = 'done';
             animation.cancel();
-            entryAnimations.delete(animation);
-        }).catch(() => { element.dataset.reveal = 'done'; entryAnimations.delete(animation); });
+        }).catch(() => { element.dataset.reveal = 'done'; });
     };
     if ('IntersectionObserver' in window && typeof Element.prototype.animate === 'function') {
         const observer = new IntersectionObserver(entries => {
@@ -146,34 +141,6 @@
     setupPointer('.tilt, .niche-demo, .program-card, .image-card', 'tilt', 6);
     setupPointer('.button, .nav__cta, .nav-cta', 'magnetic', 9);
 
-    const ticker = document.querySelector('.marquee, .ticker');
-    let toggle = document.querySelector('.motion-toggle');
-    if (!toggle && ticker) {
-        ticker.removeAttribute('aria-hidden');
-        ticker.querySelector('.ticker__track')?.setAttribute('aria-hidden', 'true');
-        toggle = document.createElement('button'); toggle.type = 'button'; ticker.appendChild(toggle);
-    }
-    if (toggle) {
-        toggle.classList.add('motion-control');
-        const label = () => {
-            const translate = source => window.DemoI18n?.t(source) ?? source;
-            toggle.textContent = translate(state.matches ? 'Activar movimiento' : 'Pausar movimiento');
-            toggle.setAttribute('aria-label', translate(state.matches ? 'Activar animaciones' : 'Pausar animaciones'));
-            toggle.setAttribute('aria-pressed', String(state.matches));
-        };
-        label();
-        document.addEventListener('demo:languagechange', label);
-        toggle.addEventListener('click', () => {
-            root.dataset.motion = state.matches ? 'full' : 'reduced';
-            document.body.classList.remove('motion-paused');
-            try { sessionStorage.setItem('traza-motion', root.dataset.motion); } catch { /* Optional preference. */ }
-            if (state.matches) {
-                entryAnimations.forEach(animation => animation.finish());
-                pointerItems.forEach(item => { item.active = false; item.tx = item.ty = 0; });
-            }
-            label(); schedule();
-        });
-    }
     addEventListener('scroll', schedule, { passive:true });
     addEventListener('resize', measure, { passive:true });
     document.addEventListener('demo:languagechange', measure);

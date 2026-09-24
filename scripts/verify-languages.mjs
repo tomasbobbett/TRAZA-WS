@@ -77,12 +77,7 @@ try {
             if (!menuFits) errors.push(`${demo.route} ${lang}: mobile navigation must span the navbar`);
             await page.keyboard.press('Escape');
             if (await menu.getAttribute('aria-expanded') !== 'false') errors.push(`${demo.route} ${lang}: menu did not close`);
-            const motion = page.locator('.motion-control');
-            if (await motion.count()) {
-                await motion.click();
-                if (await motion.getAttribute('aria-pressed') !== 'true') errors.push(`${demo.route} ${lang}: pause failed`);
-                await motion.click();
-            }
+            if (await page.locator('.motion-control, .motion-toggle').count()) errors.push(`${demo.route} ${lang}: unexpected pause control`);
             const wa = await page.locator('a[href*="wa.me"]').first().getAttribute('href');
             if (!new URL(wa).searchParams.get('text').startsWith({ es: 'Hola', en: 'Hi', pt: 'Olá' }[lang])) errors.push(`${demo.route} ${lang}: WhatsApp language`);
         }

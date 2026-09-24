@@ -10,7 +10,7 @@ const root = join(site, 'webs');
 const publicDir = join(site, 'public');
 const config = JSON.parse(await readFile(join(site, 'site.config.json'), 'utf8'));
 const origin = resolveOrigin(config);
-const version = '20260910-motion-restored';
+const version = '20260924-carousel';
 const exists = async p => stat(p).then(() => true, () => false);
 const esc = s => String(s).replaceAll('&', '&amp;').replaceAll('"', '&quot;').replaceAll('<', '&lt;').replaceAll('>', '&gt;');
 async function output(path, text) { await mkdir(dirname(path), { recursive: true }); await writeFile(path, text); }

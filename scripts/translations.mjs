@@ -10,8 +10,6 @@ Experiencia | Experience | Experiência
 Visitanos | Visit us | Visite-nos
 Conocer más | Learn more | Saiba mais
 Cifras ilustrativas de la demo | Illustrative demo figures | Números ilustrativos da demo
-Pausar animaciones | Pause animations | Pausar animações
-Pausar movimiento | Pause motion | Pausar movimento
 01 / ENFOQUE | 01 / APPROACH | 01 / PROPOSTA
 02 / EXPERIENCIA | 02 / EXPERIENCE | 02 / EXPERIÊNCIA
 03 / VISITANOS | 03 / VISIT US | 03 / VISITE-NOS
@@ -495,8 +493,6 @@ Horarios ilustrativos | Illustrative hours | Horários ilustrativos
 La experiencia | The experience | A experiência
 Peso libre, máquinas, espacio funcional, vestuarios y coaching cercano. | Free weights, machines, a functional training area, changing rooms and personal coaching. | Pesos livres, aparelhos, espaço funcional, vestiários e orientação próxima.
 Consultar por esta demo ↗ | Ask about this demo ↗ | Consultar sobre esta demo ↗
-Activar movimiento | Enable motion | Ativar movimento
-Activar animaciones | Enable animations | Ativar animações
 Completá tu nombre y consulta antes de continuar. | Enter your name and inquiry before continuing. | Preencha seu nome e consulta antes de continuar.
 Tu consulta está preparada. Confirmá el envío en WhatsApp. | Your inquiry is ready. Confirm sending it in WhatsApp. | Sua consulta está pronta. Confirme o envio no WhatsApp.
 Hola, soy {name}{business}. Vi la demo PULSO de TRAZA. {message} | Hi, I'm {name}{business}. I saw TRAZA's PULSO demo. {message} | Olá, sou {name}{business}. Vi a demo PULSO da TRAZA. {message}
@@ -518,5 +514,5 @@ for (const [es, en, pt] of [['Club de fuerza', 'Strength club', 'Clube de força
   const title = es === 'Club de fuerza' ? `PULSO — ${es} | Demo TRAZA` : `${es} — PULSO | Demo TRAZA`;
   translations[title] = es === 'Club de fuerza' ? [`PULSO — ${en} | Demo TRAZA`, `PULSO — ${pt} | Demo TRAZA`] : [`${en} — PULSO | Demo TRAZA`, `${pt} — PULSO | Demo TRAZA`];
 }
-export const dynamicCopy = ['Abrir menú', 'Cerrar menú', 'Pausar movimiento', 'Pausar animaciones', 'Activar movimiento', 'Activar animaciones', 'Completá tu nombre y consulta antes de continuar.', 'Tu consulta está preparada. Confirmá el envío en WhatsApp.', 'Hola, soy {name}{business}. Vi la demo PULSO de TRAZA. {message}', 'de {business}', 'Elegir idioma', 'Idioma: Español', 'Completá tu nombre.', 'Escribí tu consulta.'];
+export const dynamicCopy = ['Abrir menú', 'Cerrar menú', 'Completá tu nombre y consulta antes de continuar.', 'Tu consulta está preparada. Confirmá el envío en WhatsApp.', 'Hola, soy {name}{business}. Vi la demo PULSO de TRAZA. {message}', 'de {business}', 'Elegir idioma', 'Idioma: Español', 'Completá tu nombre.', 'Escribí tu consulta.'];
 export const unchanged = ['PULSO', 'TRAZA', 'WhatsApp', 'Demo', 'Palermo', 'Buenos Aires', 'Palermo, Buenos Aires', 'Palermo, Ciudad de Buenos Aires', 'Guatemala 1100', 'SR', 'TM', 'EG', 'Sofía R.', 'Tomás M.', 'Emilia G.', 'A2–B1', 'B1–C1', 'B2–C2', 'Belgrano', 'Núñez', 'Colegiales', 'Vicente López', 'Cambridge', 'Spa', 'Dermaplaning', 'Compliance', 'English Go', 'Career boost', 'Cambridge lab', 'Glow reset', 'Body contour', 'Performance', 'Personal'];

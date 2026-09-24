@@ -249,7 +249,7 @@ export function renderDemo(demo, TRAZA_PHONE) {
                 <div class="hero-metrics shell" aria-label="Cifras ilustrativas de la demo">${metricsMarkup}</div>
             </header>
 
-            <div class="marquee"><div aria-hidden="true">${stripMarkup}</div><button class="motion-toggle" type="button" aria-pressed="false" aria-label="Pausar animaciones">Pausar movimiento</button></div>
+            <div class="marquee"><div aria-hidden="true">${stripMarkup}</div></div>
 
             <section class="intro section" id="servicios">
                 <div class="shell intro-grid">

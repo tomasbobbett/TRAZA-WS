@@ -3,6 +3,7 @@ import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 import { DEMO_PAGES } from '../scripts/demo-routes.mjs';
 import { makeDictionary, pageStrings, isUnchanged } from '../scripts/i18n.mjs';
+import { dynamicCopy } from '../scripts/translations.mjs';
 
 test('every demo and secondary page has complete curated English and Portuguese copy', async () => {
     const dictionary = makeDictionary();
@@ -14,7 +15,9 @@ test('every demo and secondary page has complete curated English and Portuguese 
                 if (dictionary[source]) assert.ok(dictionary[source].length === 2 && dictionary[source].every(text => typeof text === 'string' && text.trim()), source);
             }
             const payload = JSON.parse(html.match(/<script id="demo-translations" type="application\/json">([^]*?)<\/script>/)[1]);
-            assert.ok(Object.keys(payload).length > 40, file);
+            for (const source of [...pageStrings(html), ...dynamicCopy]) {
+                if (dictionary[source]) assert.deepEqual(payload[source], dictionary[source], `${file}: ${source}`);
+            }
             assert.match(html, /assets\/languages.css/);
             assert.match(html, /assets\/languages.js/);
             assert.match(html, /<html lang="es-AR">/);

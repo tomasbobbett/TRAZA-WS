@@ -13,7 +13,7 @@ test('all sites load shared motion before their interaction scripts',async()=>{
         if (scripts.some(match => match[1].includes('assets/languages.js'))) assert.match(scripts[0][1], /assets\/languages.js/);
         assert.equal(scripts.filter(match=>match[1].includes('assets/motion.js')).length,1,route);
         assert.ok(scripts.every(match=>/\bdefer\b/.test(match[0])),route);
-        assert.match(html,/assets\/motion.css\?v=20260910-motion-restored/);
+        assert.match(html,/assets\/motion.css\?v=20260924-carousel/);
     }
 });
 
