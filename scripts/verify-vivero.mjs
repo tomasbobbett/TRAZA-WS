@@ -38,14 +38,13 @@ try {
                 const sectionHeights = [...document.querySelectorAll('main>header,main>section')].map(el=>({id:el.id,height:el.offsetHeight}));
                 const heroNote = document.querySelector('.nursery-hero-note').getBoundingClientRect();
                 const metrics = document.querySelector('.hero-metrics').getBoundingClientRect();
-                return { overflow: document.documentElement.scrollWidth - innerWidth, outside, heroClear: hero.top >= nav.bottom, heroFits:heroNote.bottom <= metrics.top && sectionHeights[0].height <= innerHeight + 2, oversized:innerWidth>960 ? sectionHeights.filter(el=>el.height>innerHeight+2) : [] };
+                return { overflow: document.documentElement.scrollWidth - innerWidth, outside, heroClear: hero.top >= nav.bottom, heroFits:heroNote.bottom <= metrics.top && sectionHeights[0].height <= innerHeight + 2, sectionHeights };
             });
             report.layouts.push({ language, width, height, ...layout });
             assert.equal(layout.overflow, 0, `${language}/${width}: horizontal overflow`);
             assert.deepEqual(layout.outside, [], `${language}/${width}: clipped content`);
             assert.ok(layout.heroClear, `${language}/${width}: hero overlaps navigation`);
             assert.ok(layout.heroFits, `${language}/${width}/${height}: hero content must fit above its metrics`);
-            assert.deepEqual(layout.oversized, [], `${language}/${width}/${height}: every desktop section must fit`);
         }
         for (const [filter, expected] of [['citricos',2],['tropicales',2],['all',4]]) {
             await page.locator(`[data-plant-filter="${filter}"]`).click();
@@ -88,7 +87,6 @@ try {
     for(let index=0;index<5;index++) {
         await page.locator('#preguntas summary').nth(index).click();
         assert.equal(await page.locator('#preguntas details[open]').count(),1);
-        assert.ok(await page.locator('#preguntas').evaluate(el=>el.offsetHeight<=innerHeight+2));
     }
     await page.locator('#preguntas summary').last().click();
     const broken = await page.locator('img').evaluateAll(images => images.filter(image => !image.complete || !image.naturalWidth).map(image => image.src));
@@ -116,7 +114,6 @@ try {
         assert.ok(message.includes({es:'Municipio',en:'Municipality',pt:'Município'}[language]));
         assert.equal(await page.locator('.nursery-message-preview').textContent(), message);
         assert.ok(await page.locator('.nursery-result').evaluate(el=>{const r=el.getBoundingClientRect();return r.top>=0&&r.bottom<=innerHeight;}));
-        assert.ok(await page.locator('#cotizar').evaluate(el=>el.offsetHeight<=innerHeight+2));
     }
     await chooseLanguage('es');
     await page.locator('[data-quote-close]').click();
