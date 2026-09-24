@@ -229,7 +229,7 @@ export function renderDemo(demo, TRAZA_PHONE) {
     const catalogMarkup = demo.catalog ? `
         <section class="plant-catalog section" id="catalogo" aria-labelledby="catalog-title">
             <div class="shell">
-                <div class="catalog-heading reveal"><div><p class="section-index">SELECCIÓN BOTÁNICA</p><h2 class="section-title" id="catalog-title">Encontrá tu<br><em>próxima planta.</em></h2></div><p class="section-copy">Explorá esta selección y consultanos por tamaños, precios y disponibilidad. Te ayudamos a elegir.</p></div>
+                <div class="catalog-heading reveal"><div><h2 class="section-title" id="catalog-title">Encontrá tu<br><em>próxima planta.</em></h2></div><p class="section-copy">Explorá esta selección y consultanos por tamaños, precios y disponibilidad. Te ayudamos a elegir.</p></div>
                 <div class="catalog-filters" role="group" aria-label="Filtrar el catálogo" hidden>
                     ${[['all','Ver todo'],['interior','Interior'],['suculentas','Suculentas'],['accesorios','Accesorios']].map(([key, label]) => `<button type="button" data-plant-filter="${key}" aria-pressed="${key === 'all'}" aria-controls="plant-grid">${label}</button>`).join('')}
                 </div>
@@ -259,7 +259,6 @@ export function renderDemo(demo, TRAZA_PHONE) {
                 <div class="hero-media" aria-hidden="true"><img src="${demo.heroImage}" alt="" fetchpriority="high" width="1800" height="1200"><span></span></div>
                 <div class="hero-orbit" aria-hidden="true"><i></i><i></i><b>${demo.brand}</b></div>
                 <div class="hero-content shell">
-                    <p class="eyebrow reveal">${demo.label} · Demo</p>
                     <h1 class="reveal" style="--delay:90ms">${demo.headline}</h1>
                     <p class="hero-copy reveal" style="--delay:170ms">${demo.description}</p>
                     <div class="hero-actions reveal" style="--delay:240ms">
@@ -276,7 +275,6 @@ export function renderDemo(demo, TRAZA_PHONE) {
 
             <section class="intro section" id="servicios">
                 <div class="shell intro-grid">
-                    <p class="section-index reveal">01 / ENFOQUE</p>
                     <h2 class="section-title reveal">${demo.intro[0]}</h2>
                     <p class="section-copy reveal">${demo.intro[1]}</p>
                 </div>
@@ -286,7 +284,6 @@ export function renderDemo(demo, TRAZA_PHONE) {
             <section class="story section" id="experiencia">
                 <div class="story-media reveal"><img src="${demo.storyImage}" alt="Ambiente de ${demo.brand}" loading="lazy" width="1400" height="1000" decoding="async"><span></span></div>
                 <div class="story-content reveal">
-                    <p class="section-index">02 / EXPERIENCIA</p>
                     <h2 class="section-title">${demo.storyTitle}</h2>
                     <p>${demo.storyCopy}</p>
                     <a href="${wa}" target="_blank" rel="noopener">${demo.storyAction || 'Conocer el enfoque'} <span>↗</span></a>
@@ -302,7 +299,6 @@ export function renderDemo(demo, TRAZA_PHONE) {
             <section class="visit section" id="visitanos">
                 <div class="visit-grid" aria-hidden="true"></div>
                 <div class="shell visit-content">
-                    <p class="section-index reveal">03 / VISITANOS</p>
                     <h2 class="section-title reveal">${demo.visitTitle || 'Todo listo para<br><em>dar el primer paso.</em>'}</h2>
                     <div class="visit-data reveal">
                         <div><small>Dónde</small><strong>${demo.location}</strong></div>
