@@ -18,17 +18,19 @@ try {
         const start = performance.now();
         const sample = now => {
             window.scrollSamples.push({ time: now - start, y: scrollY });
-            if (now - start < 1100) requestAnimationFrame(sample);
+            if (now - start < 1900) requestAnimationFrame(sample);
         };
         requestAnimationFrame(sample);
     });
     await page.mouse.wheel(0, 480);
-    await page.waitForTimeout(1300);
+    await page.waitForTimeout(2100);
     const samples = await page.evaluate(() => window.scrollSamples);
     report.wheel = { samples, distinctPositions: new Set(samples.map(sample => sample.y)).size };
     check(report.wheel.distinctPositions > 8, 'Wheel input advances gradually across multiple frames');
     check(Math.abs(samples.at(-1).y - 480) <= 2, 'Wheel input settles at its requested distance');
     check(samples.every((sample, index) => !index || sample.y >= samples[index - 1].y), 'Wheel input does not jump backward');
+    const coast = samples.find(sample => sample.time >= 400);
+    check(coast.y > 240 && coast.y < 432, 'Wheel momentum remains perceptible after 400ms');
 
     await page.mouse.wheel(0, 400);
     await page.waitForTimeout(80);
@@ -101,15 +103,25 @@ try {
     mobile.on('pageerror', error => report.errors.push(error.message));
     await mobile.goto(`${base}/demo/vivero/?lang=es`);
     await mobile.waitForTimeout(700);
+    await mobile.evaluate(() => {
+        window.touchReleaseY = 0;
+        addEventListener('touchend', () => { window.touchReleaseY = scrollY; }, { once: true, passive: true });
+    });
     const touch = await mobile.context().newCDPSession(mobile);
     await touch.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [{ x: 195, y: 700 }] });
-    for (const y of [640,580,520,460,400,340,280]) {
-        await touch.send('Input.dispatchTouchEvent', { type: 'touchMove', touchPoints: [{ x: 195, y }] });
-        await mobile.waitForTimeout(30);
+    // Send a continuous 60Hz gesture, without waiting for each protocol round trip.
+    // Waiting for acknowledgements inserts pauses that stop the finger before release.
+    const moves = [];
+    for (let y = 680; y >= 280; y -= 20) {
+        moves.push(touch.send('Input.dispatchTouchEvent', { type: 'touchMove', touchPoints: [{ x: 195, y }] }));
+        await new Promise(resolve => setTimeout(resolve, 16));
     }
-    await touch.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
+    moves.push(touch.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] }));
+    await Promise.all(moves);
     await mobile.waitForTimeout(900);
-    check(await mobile.evaluate(() => scrollY > 250), 'Touch gestures keep native scrolling on mobile');
+    report.touch = await mobile.evaluate(() => ({ released: window.touchReleaseY, settled: scrollY }));
+    check(await mobile.evaluate(() => scrollY > 250), 'Touch gestures move the page on mobile');
+    check(report.touch.settled > report.touch.released + 30, 'Touch scrolling decelerates after releasing the screen');
     await mobile.locator('.menu-button').click();
     await mobile.locator('.nav-links a[href="#visitanos"]').click();
     await mobile.waitForTimeout(1500);

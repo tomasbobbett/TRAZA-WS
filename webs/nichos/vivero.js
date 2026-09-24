@@ -1,4 +1,4 @@
-// Smooth wheel input; touch, keyboard, anchors and inner fields stay native.
+// Perceptible wheel and touch inertia; keyboard, anchors and inner fields stay native.
 (() => {
     if (!window.Lenis || document.body.dataset.demo !== 'vivero') return;
     const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
@@ -17,9 +17,11 @@
         if (reducedMotion.matches) return;
         scroll = new Lenis({
             autoRaf: true,
-            lerp: 0.12,
+            lerp: 0.065,
             smoothWheel: true,
-            syncTouch: false,
+            syncTouch: true,
+            syncTouchLerp: 0.075,
+            touchInertiaExponent: 1.7,
             anchors: false,
             prevent: node => node.matches('dialog, textarea, select, input, .nav-links, .language-dropdown'),
         });
