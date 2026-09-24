@@ -148,15 +148,21 @@
 
     const ticker = document.querySelector('.marquee, .ticker');
     let toggle = document.querySelector('.motion-toggle');
-    if (!toggle && ticker) { toggle = document.createElement('button'); toggle.type = 'button'; ticker.appendChild(toggle); }
+    if (!toggle && ticker) {
+        ticker.removeAttribute('aria-hidden');
+        ticker.querySelector('.ticker__track')?.setAttribute('aria-hidden', 'true');
+        toggle = document.createElement('button'); toggle.type = 'button'; ticker.appendChild(toggle);
+    }
     if (toggle) {
         toggle.classList.add('motion-control');
         const label = () => {
-            toggle.textContent = state.matches ? 'Activar movimiento' : 'Pausar movimiento';
-            toggle.setAttribute('aria-label', state.matches ? 'Activar animaciones' : 'Pausar animaciones');
+            const translate = source => window.DemoI18n?.t(source) ?? source;
+            toggle.textContent = translate(state.matches ? 'Activar movimiento' : 'Pausar movimiento');
+            toggle.setAttribute('aria-label', translate(state.matches ? 'Activar animaciones' : 'Pausar animaciones'));
             toggle.setAttribute('aria-pressed', String(state.matches));
         };
         label();
+        document.addEventListener('demo:languagechange', label);
         toggle.addEventListener('click', () => {
             root.dataset.motion = state.matches ? 'full' : 'reduced';
             document.body.classList.remove('motion-paused');
@@ -170,6 +176,7 @@
     }
     addEventListener('scroll', schedule, { passive:true });
     addEventListener('resize', measure, { passive:true });
+    document.addEventListener('demo:languagechange', measure);
     addEventListener('load', measure, { once:true });
     document.fonts?.ready.then(measure);
     document.addEventListener('visibilitychange', () => {

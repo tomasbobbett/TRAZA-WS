@@ -1,0 +1,40 @@
+/* A quiet, consistent language control inside each demo's own navigation. */
+.nav.nav--languages { grid-template-columns:minmax(0,1fr) auto auto auto; column-gap:22px; }
+.language-switcher { display:flex; align-items:center; gap:2px; padding:3px; border:1px solid #ffffff35; border-radius:999px; background:#00000020; justify-self:end; }
+.language-switcher button { display:grid; place-items:center; width:36px; min-height:36px; padding:0; border:0; border-radius:50%; background:transparent; color:#ffffffc7; font:700 10px/1 'Manrope',sans-serif; letter-spacing:.04em; cursor:pointer; transition:background .2s,color .2s; }
+.language-switcher button:hover { background:#ffffff18; color:#fff; }
+.language-switcher button[aria-pressed="true"] { color:#171717; background:#fff; }
+.language-switcher button:focus-visible { outline:2px solid #fff; outline-offset:4px; }
+.language-status { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap; }
+.nav--languages .brand { min-width:0; }
+.nav--languages .nav-cta, .nav--languages .nav__cta { text-align:center; line-height:1.4; }
+html[data-language] .button { white-space:normal; line-height:1.5; text-align:center; padding-block:14px; }
+html[data-language] .button > span, html[data-language] .button > i { flex-shrink:0; }
+html[data-language] .service-card h3 { overflow-wrap:anywhere; }
+html[data-language] .hero-metrics > div, html[data-language] .hero__metric { min-width:0; }
+@media (max-width:1280px) { .nav--languages .brand small { display:none; } .nav.nav--languages { column-gap:16px; } }
+@media (max-width:1120px) {
+    .nav.nav--languages { grid-template-columns:minmax(0,1fr) auto 48px; gap:10px; }
+    .nav--languages .brand { grid-column:1; grid-row:1; }
+    .nav--languages .language-switcher { grid-column:2; grid-row:1; }
+    .nav--languages .menu-button, .nav--languages .nav__toggle { grid-column:3; grid-row:1; }
+    .nav--languages .nav-cta, .nav--languages .nav__cta { display:none; }
+    /* Match both demos' navigation breakpoint so the added control never crowds links. */
+    .nav--languages .menu-button { display:flex; width:48px; height:48px; flex-direction:column; align-items:center; justify-content:center; gap:7px; border:1px solid #ffffff40; background:transparent; }
+    .nav--languages .menu-button i { width:18px; height:1px; background:#fff; }
+    .nav--languages .nav-links { position:absolute; top:calc(100% + 8px); left:0; right:0; display:flex; flex-direction:column; gap:0; padding:12px; background:var(--dark); opacity:0; visibility:hidden; pointer-events:none; }
+    .nav--languages .nav-links.open { opacity:1; visibility:visible; pointer-events:auto; }
+    .nav--languages .nav-links a { padding:14px; }
+}
+@media (max-width:600px) {
+    .nav.nav--languages { column-gap:6px; }
+    .language-switcher button { width:32px; min-height:38px; }
+    html[data-language] .hero h1 { font-size:clamp(2.6rem,12.2vw,4.6rem); line-height:1.04; }
+    html[data-language] .section-title, html[data-language] .story-content .section-title { font-size:clamp(2.5rem,11.5vw,4.5rem); line-height:1.08; }
+    html[data-language] .hero__title { font-size:clamp(3.8rem,17vw,6rem); line-height:1.03; }
+    html[data-language] .display { font-size:clamp(3rem,13.5vw,5rem); overflow-wrap:break-word; }
+    html[data-language] .secondary-main > .display { font-size:clamp(3rem,13vw,5rem); }
+    html[data-language] .hero-metrics strong { font-size:clamp(.95rem,4.1vw,1.3rem); }
+    html[data-language] .hero-metrics span { font-size:.52rem; letter-spacing:.04em; }
+    html[data-language] .footer div { flex-wrap:wrap; }
+}

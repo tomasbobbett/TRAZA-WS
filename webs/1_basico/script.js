@@ -6,6 +6,7 @@ const gallery = document.querySelector('#galeriaModal');
 const openGalleryButton = document.querySelector('#openGaleria');
 const closeGalleryButton = document.querySelector('#closeGaleria');
 const whatsappButton = document.querySelector('.floating-contact');
+const translate = source => window.DemoI18n?.t(source) ?? source;
 
 let lastFocusedElement = null;
 let scrollTicking = false;
@@ -31,7 +32,7 @@ function requestScrollUpdate() {
 function closeMenu() {
     if (!navToggle || !navMenu) return;
     navToggle.setAttribute('aria-expanded', 'false');
-    navToggle.setAttribute('aria-label', 'Abrir menú');
+    navToggle.setAttribute('aria-label', translate('Abrir menú'));
     navMenu.classList.remove('is-open');
     document.body.classList.remove('menu-open');
 }
@@ -40,7 +41,7 @@ function toggleMenu() {
     if (!navToggle || !navMenu) return;
     const willOpen = navToggle.getAttribute('aria-expanded') !== 'true';
     navToggle.setAttribute('aria-expanded', String(willOpen));
-    navToggle.setAttribute('aria-label', willOpen ? 'Cerrar menú' : 'Abrir menú');
+    navToggle.setAttribute('aria-label', translate(willOpen ? 'Cerrar menú' : 'Abrir menú'));
     navMenu.classList.toggle('is-open', willOpen);
     document.body.classList.toggle('menu-open', willOpen);
 }

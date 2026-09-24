@@ -1,4 +1,23 @@
 const contactForm = document.querySelector('#gym-contact');
+const contactTranslate = (source, values = {}) => window.DemoI18n?.t(source, values) ?? source.replace(/\{(\w+)\}/g, (match, key) => values[key] ?? match);
+function contactStatus(source) {
+    const status = document.querySelector('#contact-status');
+    status.dataset.message = source;
+    status.textContent = contactTranslate(source);
+}
+function validateContactFields() {
+    for (const [id, source] of [['contact-name', 'Completá tu nombre.'], ['contact-message', 'Escribí tu consulta.']]) {
+        const field = document.getElementById(id);
+        if (field) field.setCustomValidity(field.value.trim() ? '' : contactTranslate(source));
+    }
+}
+contactForm?.addEventListener('input', validateContactFields);
+validateContactFields();
+document.addEventListener('demo:languagechange', () => {
+    validateContactFields();
+    const source = document.querySelector('#contact-status')?.dataset.message;
+    if (source) contactStatus(source);
+});
 contactForm?.addEventListener('submit', event => {
     event.preventDefault();
     if (!contactForm.reportValidity()) return;
@@ -6,14 +25,15 @@ contactForm?.addEventListener('submit', event => {
     const name = String(data.get('name') || '').trim();
     const message = String(data.get('message') || '').trim();
     const business = String(data.get('business') || '').trim();
-    const status = document.querySelector('#contact-status');
     if (!name || !message) {
-        status.textContent = 'Completá tu nombre y consulta antes de continuar.';
+        contactStatus('Completá tu nombre y consulta antes de continuar.');
         return;
     }
-    const text = `Hola, soy ${name}${business ? ` de ${business}` : ''}. Vi la demo PULSO de TRAZA. ${message}`;
+    const text = contactTranslate('Hola, soy {name}{business}. Vi la demo PULSO de TRAZA. {message}', {
+        name, business: business ? ` ${contactTranslate('de {business}', { business })}` : '', message
+    });
     const url = new URL(contactForm.action);
     url.searchParams.set('text', text);
-    status.textContent = 'Tu consulta está preparada. Confirmá el envío en WhatsApp.';
+    contactStatus('Tu consulta está preparada. Confirmá el envío en WhatsApp.');
     window.location.assign(url.href);
 });

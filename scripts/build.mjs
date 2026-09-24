@@ -4,6 +4,7 @@ import { fileURLToPath } from 'node:url';
 import { DEMO_ROUTES } from './demo-routes.mjs';
 import { separateDemos } from './separate-demos.mjs';
 import { resolveOrigin } from './site-origin.mjs';
+import { addTranslations } from './i18n.mjs';
 
 const project = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const output = join(project, 'public');
@@ -20,6 +21,7 @@ if (existing) {
   await rm(output, { recursive: true });
 }
 await import('./prepare-public.mjs');
+await addTranslations(output);
 await separateDemos(output);
 
 // The main address serves the complete agency page, with assets resolved from /.
