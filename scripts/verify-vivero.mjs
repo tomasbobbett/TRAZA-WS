@@ -16,13 +16,16 @@ try {
     await page.locator('h1.visible').waitFor();
     await page.screenshot({ path: `${output}/desktop.png` });
     const chooseLanguage = async language => {
+        const previewOpen = await page.locator('.nursery-result').evaluate(el => el.open);
+        if (previewOpen) await page.locator('[data-quote-close]').click();
         await page.locator('.language-trigger').click();
         await page.locator(`[data-language="${language}"].language-option`).click();
+        if (previewOpen) await page.locator('#nursery-quote button[type="submit"]').click();
     };
     for (const language of ['es', 'en', 'pt']) {
         await chooseLanguage(language);
-        for (const width of [1440, 1280, 1121, 1120, 1024, 768, 390, 320]) {
-            await page.setViewportSize({ width, height: width > 600 ? 1000 : 844 });
+        for (const [width,height] of [[1920,1080],[1440,900],[1366,768],[1280,720],[1280,556],[1121,700],[1120,700],[1024,768],[1024,600],[1024,556],[768,1024],[390,844],[320,568]]) {
+            await page.setViewportSize({ width, height });
             await page.waitForTimeout(200);
             const layout = await page.evaluate(() => {
                 const outside = [];
@@ -32,12 +35,17 @@ try {
                 }
                 const hero = document.querySelector('h1').getBoundingClientRect();
                 const nav = document.querySelector('.nav').getBoundingClientRect();
-                return { overflow: document.documentElement.scrollWidth - innerWidth, outside, heroClear: hero.top >= nav.bottom };
+                const sectionHeights = [...document.querySelectorAll('main>header,main>section')].map(el=>({id:el.id,height:el.offsetHeight}));
+                const heroNote = document.querySelector('.nursery-hero-note').getBoundingClientRect();
+                const metrics = document.querySelector('.hero-metrics').getBoundingClientRect();
+                return { overflow: document.documentElement.scrollWidth - innerWidth, outside, heroClear: hero.top >= nav.bottom, heroFits:heroNote.bottom <= metrics.top && sectionHeights[0].height <= innerHeight + 2, oversized:innerWidth>960 ? sectionHeights.filter(el=>el.height>innerHeight+2) : [] };
             });
-            report.layouts.push({ language, width, ...layout });
+            report.layouts.push({ language, width, height, ...layout });
             assert.equal(layout.overflow, 0, `${language}/${width}: horizontal overflow`);
             assert.deepEqual(layout.outside, [], `${language}/${width}: clipped content`);
             assert.ok(layout.heroClear, `${language}/${width}: hero overlaps navigation`);
+            assert.ok(layout.heroFits, `${language}/${width}/${height}: hero content must fit above its metrics`);
+            assert.deepEqual(layout.oversized, [], `${language}/${width}/${height}: every desktop section must fit`);
         }
         for (const [filter, expected] of [['citricos',2],['tropicales',2],['all',4]]) {
             await page.locator(`[data-plant-filter="${filter}"]`).click();
@@ -71,6 +79,18 @@ try {
         await page.waitForTimeout(600);
     }
     await page.screenshot({ path: `${output}/full.png`, fullPage: true });
+    await page.setViewportSize({width:1280,height:556});
+    for(const id of ['inicio','proyectos','catalogo','experiencia','cotizar','preguntas','visitanos']) {
+        await page.locator(`#${id}`).evaluate(el=>el.scrollIntoView({block:'start',behavior:'instant'}));
+        await page.waitForTimeout(900);
+        await page.screenshot({path:`${output}/viewport-${id}.png`});
+    }
+    for(let index=0;index<5;index++) {
+        await page.locator('#preguntas summary').nth(index).click();
+        assert.equal(await page.locator('#preguntas details[open]').count(),1);
+        assert.ok(await page.locator('#preguntas').evaluate(el=>el.offsetHeight<=innerHeight+2));
+    }
+    await page.locator('#preguntas summary').last().click();
     const broken = await page.locator('img').evaluateAll(images => images.filter(image => !image.complete || !image.naturalWidth).map(image => image.src));
     assert.deepEqual(broken, [], 'All local photographs load');
     // Quote preparation must preserve selections and details across all languages.
@@ -95,12 +115,16 @@ try {
         assert.ok(message.includes({es:'Limón, Palta',en:'Lemon, Avocado',pt:'Limão, Abacate'}[language]));
         assert.ok(message.includes({es:'Municipio',en:'Municipality',pt:'Município'}[language]));
         assert.equal(await page.locator('.nursery-message-preview').textContent(), message);
+        assert.ok(await page.locator('.nursery-result').evaluate(el=>{const r=el.getBoundingClientRect();return r.top>=0&&r.bottom<=innerHeight;}));
+        assert.ok(await page.locator('#cotizar').evaluate(el=>el.offsetHeight<=innerHeight+2));
     }
     await chooseLanguage('es');
+    await page.locator('[data-quote-close]').click();
     await page.locator('#quote-quantity').fill('300');
     assert.ok(await page.locator('.nursery-result').isHidden(), 'Editing invalidates the old quote link');
     await page.locator('#nursery-quote button[type="submit"]').click();
     assert.ok(new URL(await page.locator('[data-quote-link]').getAttribute('href')).searchParams.get('text').includes('300'));
+    await page.keyboard.press('Escape');
     await page.locator('#quote-name').fill('   ');
     await page.locator('#nursery-quote button[type="submit"]').click();
     assert.ok(await page.locator('.nursery-result').isHidden(), 'Whitespace name cannot create a quote');
@@ -112,6 +136,7 @@ try {
     await page.locator('#quote-quantity').fill('');
     await page.locator('#nursery-quote button[type="submit"]').click();
     assert.ok(new URL(await page.locator('[data-quote-link]').getAttribute('href')).searchParams.get('text').includes('A definir'));
+    await page.locator('[data-quote-close]').click();
     await page.locator('#preguntas summary').first().click();
     assert.ok(await page.locator('#preguntas details').first().getAttribute('open') !== null);
     const map = new URL(await page.locator('a[href*="google.com/maps"]').getAttribute('href'));

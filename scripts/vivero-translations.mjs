@@ -1,4 +1,5 @@
 const rows = `
+Volver al formulario | Back to the form | Voltar ao formulário
 Vivero | Nursery | Viveiro
 la Loma | la Loma | la Loma
 Frutales | Fruit trees | Frutíferas

@@ -8,7 +8,9 @@
     const link = form.querySelector('[data-quote-link]');
     const t = source => window.DemoI18n?.t(source) ?? source;
     fields.hidden = false;
-    const clearResult = () => { result.hidden = true; };
+    const clearResult = () => { result.close(); result.hidden = true; };
+    result.querySelector('[data-quote-close]').addEventListener('click', clearResult);
+    result.addEventListener('close', () => { result.hidden = true; });
     form.addEventListener('input', clearResult);
     form.addEventListener('change', clearResult);
 
@@ -48,6 +50,7 @@
         preview.textContent = message;
         status.textContent = t('Tu consulta está lista. Revisala y continuá a WhatsApp para enviarla.');
         result.hidden = false;
+        if (!result.open) result.showModal();
     }
     form.addEventListener('submit', event => {
         event.preventDefault();
@@ -59,7 +62,6 @@
         if (!form.reportValidity()) return;
         prepareMessage();
         link.focus({ preventScroll: true });
-        result.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth', block: 'nearest' });
     });
     // The shared language switcher restores original links before this event.
     document.addEventListener('demo:languagechange', () => {
