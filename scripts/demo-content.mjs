@@ -1,33 +1,7 @@
+import { nursery, renderNursery } from './vivero-content.mjs';
+
 export const DEMOS = {
-    vivero: {
-        theme: 'garden', layout: 'botanical', brand: 'RAÍZ', label: 'Vivero & jardín · Buenos Aires',
-        headline: 'Un poco de verde.<br><em>Otra forma de vivir.</em>',
-        description: 'Plantas, macetas y pequeños rituales para llenar de vida tu casa. Te ayudamos a encontrar el verde que va con vos.',
-        heroImage: '/assets/vivero/invernadero.jpg', storyImage: '/assets/vivero/vivero.jpg',
-        alt: 'Plantas en macetas dentro de un invernadero', action: 'Encontrar mi planta',
-        primaryAnchor: '#catalogo', navServices: 'Plantas', navExperience: 'Cuidados',
-        accentNote: 'Elegí con calma · consultanos por WhatsApp',
-        strip: ['Plantas de interior', 'Rincones verdes', 'Suculentas', 'Macetas', 'Sustratos', 'Hecho para crecer'],
-        metrics: [['Interior', 'verde para tu casa'], ['A tu ritmo', 'cuidados simples'], ['Con vos', 'desde la primera hoja']],
-        intro: ['Hay una planta para tu forma de vivir.', 'La luz de tu casa, el espacio y tu rutina importan. Contanos cómo es tu rincón y te ayudamos a elegir una planta que lo disfrute tanto como vos.'],
-        services: [
-            ['01', 'Tu rincón verde', 'Plantas para interiores luminosos, patios y balcones. Encontramos la indicada para cada ambiente.', 'Asesoramiento'],
-            ['02', 'Regalá vida', 'Una planta, una maceta y un mensaje especial. Un regalo que sigue creciendo.', 'Con intención'],
-            ['03', 'Todo para crecer', 'Macetas, sustratos y herramientas para acompañar cada nueva hoja.', 'Para cuidar']
-        ],
-        catalog: [
-            { name: 'Monstera', category: 'interior', label: 'Interior', image: '/assets/vivero/monstera.jpg', alt: 'Monstera de hojas grandes en una maceta blanca', description: 'Hojas grandes para darle protagonismo a ese rincón luminoso.', light: 'Luz indirecta', water: 'Dejar secar la capa superior' },
-            { name: 'Helecho', category: 'interior', label: 'Interior', image: '/assets/vivero/verde.jpg', alt: 'Frondas verdes de un helecho', description: 'Verde abundante para espacios frescos, húmedos y sin sol directo.', light: 'Semisombra', water: 'Sustrato ligeramente húmedo' },
-            { name: 'Suculenta cebra', category: 'suculentas', label: 'Suculentas', image: '/assets/vivero/interior.jpg', alt: 'Suculenta de hojas rayadas en una maceta verde agua', description: 'Pequeña, de crecimiento lento y perfecta para empezar.', light: 'Luz brillante indirecta', water: 'Dejar secar entre riegos' },
-            { name: 'Kit de trasplante', category: 'accesorios', label: 'Accesorios', image: '/assets/vivero/vivero.jpg', alt: 'Palita, sustrato y macetas sobre una mesa de jardinería', description: 'Lo esencial para cambiar de maceta y darle lugar a nuevas raíces.', light: 'Sustrato + herramientas', water: 'Te orientamos para usarlo' }
-        ],
-        storyTitle: 'No hace falta saber.<br><em>Hace falta empezar.</em>',
-        storyCopy: 'Te contamos dónde ubicar tu planta, cómo reconocer cuándo necesita agua y cuándo cambiarla de maceta. Cuidados claros, sin complicarte la vida. Y si aparece una duda, nos mandás una foto por WhatsApp.',
-        storyAction: 'Quiero ayuda para elegir',
-        quote: 'Llegué sin saber qué planta elegir. Me fui con una para mi casa y las ganas de seguir sumando verde.', person: '— CLARA, CLIENTA ILUSTRATIVA',
-        location: 'Zona norte · Buenos Aires', hours: 'Lun a sáb · 9 a 18 h', booking: 'Consultar retiro o envío',
-        visitTitle: 'Tu próximo rincón verde<br><em>empieza acá.</em>'
-    },
+    vivero: nursery,
     estetica: {
         theme: 'blush', layout: 'soft', brand: 'ALMA', label: 'Estética integral · Palermo',
         headline: 'Tu piel.<br><em>Tu mejor versión.</em>',
@@ -241,6 +215,7 @@ export const DEMOS = {
 
 
 export function renderDemo(demo, TRAZA_PHONE) {
+    if (demo === nursery) return renderNursery();
     const whatsappText = encodeURIComponent(`Hola, vi la demo ${demo.brand} de TRAZA y quiero una web así para mi negocio.`);
     const wa = `https://wa.me/${TRAZA_PHONE}?text=${whatsappText}`;
     const primaryLink = demo.primaryAnchor ? `href="${demo.primaryAnchor}"` : `href="${wa}" target="_blank" rel="noopener"`;

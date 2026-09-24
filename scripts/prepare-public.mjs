@@ -10,7 +10,7 @@ const root = join(site, 'webs');
 const publicDir = join(site, 'public');
 const config = JSON.parse(await readFile(join(site, 'site.config.json'), 'utf8'));
 const origin = resolveOrigin(config);
-const version = '20260924-vivero';
+const version = '20260924-la-loma';
 const exists = async p => stat(p).then(() => true, () => false);
 const esc = s => String(s).replaceAll('&', '&amp;').replaceAll('"', '&quot;').replaceAll('<', '&lt;').replaceAll('>', '&gt;');
 async function output(path, text) { await mkdir(dirname(path), { recursive: true }); await writeFile(path, text); }
@@ -28,6 +28,8 @@ async function copyTree(from, to) {
 for (const folder of ['agencia', '1_basico', 'nichos', 'assets']) {
   await copyTree(join(root, folder), join(publicDir, folder));
 }
+// The nursery has local fonts; skip the unrelated remote font families.
+await output(join(publicDir, 'nichos/vivero-base.css'), (await readFile(join(root, 'nichos/demo.css'), 'utf8')).replace(/^@import[^\r\n]*\r?\n/, ''));
 // Remove only known private/starter artifacts from the public copy.
 for (const path of ['PLAN_COMERCIAL.md', 'agencia/prospeccion.html', 'favicon.svg', 'file.svg', 'globe.svg', 'window.svg']) {
   await unlink(join(publicDir, path)).catch(error => { if (error.code !== 'ENOENT') throw error; });
@@ -66,9 +68,9 @@ ${extra}</head>`;
 for (const [key, demo] of Object.entries(DEMOS)) {
   const title = `${demo.brand} — ${demo.label.split(' · ')[0]} | Demo TRAZA`;
   const description = `Demo conceptual de ${demo.brand}. ${demo.description}`;
-  const html = head(title,description,key,`/nichos/${key}.html`,demo.heroImage,`<link rel="stylesheet" href="demo.css?v=${version}"><link rel="stylesheet" href="../assets/whatsapp.css?v=20260910-traza">`)
+  const html = head(title,description,key,`/nichos/${key}.html`,demo.heroImage,`<link rel="stylesheet" href="${key === 'vivero' ? 'vivero-base' : 'demo'}.css?v=${version}">${key === 'vivero' ? `<link rel="stylesheet" href="vivero.css?v=${version}">` : ''}<link rel="stylesheet" href="../assets/whatsapp.css?v=20260910-traza">`)
     .replace('<meta name="theme-color" content="#080b12">', `<meta name="theme-color" content="${({blush:'#2e2223',clinic:'#0b2930',fire:'#1e0c08',estate:'#17241c',legal:'#0c182a',garage:'#0c0c0c',vet:'#24372a',academy:'#15225d',home:'#0d2d3c',event:'#110512',stay:'#25261f',garden:'#172e23'})[demo.theme]}">`)
-    + `<body data-demo="${key}" class="theme-${demo.theme} layout-${demo.layout}">${renderDemo(demo,config.whatsapp)}<script src="demo.js?v=${version}" defer></script></body></html>`;
+    + `<body data-demo="${key}" class="theme-${demo.theme} layout-${demo.layout}">${renderDemo(demo,config.whatsapp)}<script src="demo.js?v=${version}" defer></script>${key === 'vivero' ? `<script src="vivero.js?v=${version}" defer></script>` : ''}</body></html>`;
   await output(join(publicDir, 'nichos', `${key}.html`),html);
 }
 

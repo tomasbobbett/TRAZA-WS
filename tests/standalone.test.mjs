@@ -11,7 +11,8 @@ test('every industry opens its own complete demo and never sends visitors to the
     for (const path of [source, `${route}index.html`]) {
       const html = await read(path);
       assert.match(html, /<main\b/);
-      assert.match(html, /href="https:\/\/wa.me\/5493446210306\?text=/);
+      const recipient = source === '/nichos/vivero.html' ? '59172139484' : '5493446210306';
+      assert.ok(html.includes(`href="https://wa.me/${recipient}?text=`), path);
       assert.doesNotMatch(html, /Todas las demos|Volver al catálogo|Ver todas las demos|href="[^"]*agencia\/index.html/i, path);
       assert.doesNotMatch(html, /http-equiv="refresh"|window.location/, path);
       const canonical = html.match(/<link rel="canonical" href="([^"]+)"/);

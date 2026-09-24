@@ -31,10 +31,11 @@ test('translated WhatsApp context retains the brand and service for every destin
         const html = await readFile(new URL(`../public${source}`, import.meta.url), 'utf8');
         for (const match of html.matchAll(/href="(https:\/\/wa.me\/[^"]+)"/g)) {
             const url = new URL(match[1]);
-            assert.equal(url.pathname, '/5493446210306');
+            const isNursery = source === '/nichos/vivero.html';
+            assert.equal(url.pathname, isNursery ? '/59172139484' : '/5493446210306');
             const copy = dictionary[url.searchParams.get('text')];
             assert.equal(copy?.length, 2, match[1]);
-            assert.ok(copy.every(text => text.includes('TRAZA') && !text.includes('undefined')));
+            assert.ok(copy.every(text => text.includes(isNursery ? 'Vivero la Loma' : 'TRAZA') && !text.includes('undefined')));
         }
     }
 });
