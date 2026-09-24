@@ -456,9 +456,6 @@ cada objetivo. | every goal. | cada objetivo.
 No importa dónde empezás. Armamos el camino para que avances con seguridad, intención y resultados medibles. | Wherever you start, we build a path for safe, purposeful progress with measurable results. | Não importa de onde você começa. Criamos um caminho para evoluir com segurança, propósito e resultados mensuráveis.
 Mujer entrenando fuerza con barra | Woman strength training with a barbell | Mulher treinando força com barra
 Base · Técnica · Progreso | Foundations · Technique · Progress | Base · Técnica · Progresso
-Levantá con confianza. Técnica, peso libre y un plan para superar tu propia marca. | Lift with confidence. Technique, free weights and a plan to beat your personal best. | Levante com confiança. Técnica, pesos livres e um plano para superar sua própria marca.
-Movete más rápido. Combiná potencia y resistencia para llevar tu energía a otro nivel. | Move faster. Combine power and endurance to take your energy to the next level. | Mova-se mais rápido. Combine potência e resistência para levar sua energia a outro nível.
-Tu objetivo, tu ritmo. Un coach enfocado en vos, con seguimiento en cada sesión. | Your goal, your pace. A coach focused on you, with guidance in every session. | Seu objetivo, seu ritmo. Um treinador focado em você, com acompanhamento em cada sessão.
 Descubrir programa | Explore the program | Conhecer o programa
 Atleta saltando durante una sesión de rendimiento | Athlete jumping during a performance session | Atleta saltando durante um treino de desempenho
 Potencia · Agilidad · Energía | Power · Agility · Energy | Potência · Agilidade · Energia
