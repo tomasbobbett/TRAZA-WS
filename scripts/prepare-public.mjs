@@ -140,7 +140,7 @@ for (const path of routes.map(route => route.slice(1))) {
   const prefix=path.startsWith('1_basico/pages/')?'../../':'../';
   html=html.replace(/<link\b[^>]*href="[^"]*assets\/motion.css[^"]*"[^>]*>\s*/g,'').replace(/<script\b[^>]*src="[^"]*assets\/motion.js[^"]*"[^>]*><\/script>\s*/g,'');
   html=html.replace('</head>',`<link rel="stylesheet" href="${prefix}assets/motion.css?v=${version}">\n<script src="${prefix}assets/motion.js?v=${version}" defer></script>\n</head>`);
-  html=html.replace(/((?:href|src)="(?!https?:)[^"?]+\.(?:css|js))(?:\?v=[^"]*)?"/g,(match,path)=>path.includes('whatsapp.css')?match:`${path}?v=${version}"`);
+  html=html.replace(/((?:href|src)="(?!https?:)[^"?]+\.(?:css|js))(?:\?v=[^"]*)?"/g,(match,path)=>path.includes('whatsapp.css')?match:`${path}?v=${/vivero\.(?:css|js)$/.test(path) ? nurseryVersion : version}"`);
   html=html.replace(/<script\b[^>]*src="[^"]+"[^>]*>/g,tag=>/\bdefer\b/.test(tag)?tag:tag.replace('>',' defer>'));
   if(path==='agencia/privacidad.html') html=html.replace('<h2>Servicios externos</h2>','<h2>Preferencia de movimiento</h2><p>El control de animaciones guarda tu elección sólo durante esta sesión del navegador. No se envía a un servidor.</p><h2>Servicios externos</h2>');
   if(sourceExists)await output(sourcePath,html);
