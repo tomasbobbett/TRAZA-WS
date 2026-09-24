@@ -17,14 +17,14 @@ test('production and preview use Netlify URLs instead of the previous hosting', 
   }
 });
 
-test('the root renders the complete catalogue and all twelve demos can be shared', async () => {
+test('the root renders the complete catalogue and all thirteen demos can be shared', async () => {
   const homepage = await read('index.html');
   assert.match(homepage, /id="demo"/);
   assert.match(homepage, /href="\/agencia\/styles.css/);
   assert.match(homepage, /src="\/assets\/motion.js/);
-  assert.equal((homepage.match(/class="niche-demo /g) || []).length, 12);
+  assert.equal((homepage.match(/class="niche-demo /g) || []).length, 13);
   assert.doesNotMatch(homepage, /http-equiv="refresh"/);
-  assert.equal((await read('enlaces.txt')).split('\n').filter(line => /\/demo\/[a-z]+\/$/.test(line)).length, 12);
+  assert.equal((await read('enlaces.txt')).split('\n').filter(line => /\/demo\/[a-z]+\/$/.test(line)).length, 13);
 });
 
 test('only web assets are included in the published folder', async () => {

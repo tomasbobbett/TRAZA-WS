@@ -2,6 +2,7 @@ import { DEMOS } from './demo-content.mjs';
 
 // One stable address per industry, shared by the catalogue, metadata and link list.
 const labels = {
+  vivero: 'Vivero',
   estetica: 'Estética', odontologia: 'Odontología', gastronomia: 'Gastronomía',
   inmobiliaria: 'Inmobiliaria', profesional: 'Estudio jurídico / profesionales',
   taller: 'Taller mecánico', veterinaria: 'Veterinaria', academia: 'Academia de idiomas',

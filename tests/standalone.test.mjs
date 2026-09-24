@@ -6,7 +6,7 @@ import { DEMO_ROUTES, DEMO_PAGES } from '../scripts/demo-routes.mjs';
 const read = path => readFile(new URL('../public' + path, import.meta.url), 'utf8');
 
 test('every industry opens its own complete demo and never sends visitors to the catalogue', async () => {
-  assert.equal(DEMO_ROUTES.length, 12);
+  assert.equal(DEMO_ROUTES.length, 13);
   for (const { source, route } of DEMO_PAGES) {
     for (const path of [source, `${route}index.html`]) {
       const html = await read(path);
@@ -43,9 +43,9 @@ test('direct demos resolve resources and navigation with or without a trailing s
   }
 });
 
-test('the share list contains only the twelve direct demo links and the catalogue uses them', async () => {
+test('the share list contains only the thirteen direct demo links and the catalogue uses them', async () => {
   const links = (await read('/enlaces.txt')).split('\n').filter(line => /^(https:\/\/|\/)/.test(line));
-  assert.equal(links.length, 12);
+  assert.equal(links.length, 13);
   assert.deepEqual(links.map(link => new URL(link, 'https://example.com').pathname), DEMO_ROUTES.map(demo => demo.route));
   const catalogue = await read('/agencia/index.html');
   for (const { key, brand } of DEMO_ROUTES) {

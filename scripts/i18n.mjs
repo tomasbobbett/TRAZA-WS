@@ -36,7 +36,7 @@ export function makeDictionary() {
     dictionary[`Demo conceptual de ${demo.brand}. ${demo.description}`] = [0, 1].map(i => `${i ? 'Demo conceitual de' : 'Concept demo for'} ${demo.brand}. ${translate(demo.description, i)}`);
     dictionary[`Ambiente de ${demo.brand}`] = [`Inside ${demo.brand}`, `Ambiente da ${demo.brand}`];
     dictionary[`Hola, vi la demo ${demo.brand} de TRAZA y quiero una web así para mi negocio.`] = [`Hi, I saw TRAZA's ${demo.brand} demo and would like a website like this for my business.`, `Olá, vi a demo ${demo.brand} da TRAZA e quero um site assim para o meu negócio.`];
-    for (const [, title] of demo.services) {
+    for (const title of [...demo.services.map(service => service[1]), ...(demo.catalog || []).map(plant => plant.name)]) {
       dictionary[`Consultar por la demo ${demo.brand}: ${title}`] = [`Ask about the ${demo.brand} demo: ${translate(title, 0)}`, `Consultar sobre a demo ${demo.brand}: ${translate(title, 1)}`];
       dictionary[`Hola, vi la demo ${demo.brand} de TRAZA, en la sección ${title}, y quiero una web así para mi negocio.`] = [`Hi, I saw TRAZA's ${demo.brand} demo, in the ${translate(title, 0)} section, and would like a website like this for my business.`, `Olá, vi a demo ${demo.brand} da TRAZA, na seção ${translate(title, 1)}, e quero um site assim para o meu negócio.`];
     }

@@ -1,0 +1,10 @@
+{
+  "license": "https://unsplash.com/license",
+  "images": [
+    { "file": "invernadero.jpg", "source": "https://unsplash.com/photos/various-potted-plants-displayed-inside-a-greenhouse-TLaK2RKOsgs", "photographer": "Annie Spratt" },
+    { "file": "monstera.jpg", "source": "https://unsplash.com/photos/green-plant-on-white-ceramic-pot-E3axNqcXtmk", "photographer": "feey" },
+    { "file": "interior.jpg", "source": "https://images.unsplash.com/photo-1485955900006-10f4d324d411" },
+    { "file": "verde.jpg", "source": "https://images.unsplash.com/photo-1497250681960-ef046c08a56e" },
+    { "file": "vivero.jpg", "source": "https://images.unsplash.com/photo-1416879595882-3373a0480b5b" }
+  ]
+}

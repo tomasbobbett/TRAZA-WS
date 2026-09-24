@@ -51,3 +51,19 @@ function closeDemoMenu(restoreFocus = false) {
 addEventListener('keydown', event => { if (event.key === 'Escape') closeDemoMenu(true); });
 addEventListener('resize', () => { if (innerWidth > 1120) closeDemoMenu(); });
 document.addEventListener('click', event => { if (!nav?.contains(event.target)) closeDemoMenu(); });
+
+// Filters only appear once the catalog is interactive; without JS all items remain visible.
+const plantFilters = document.querySelector('.catalog-filters');
+if (plantFilters) {
+    const cards = [...document.querySelectorAll('[data-plant-category]')];
+    const buttons = [...plantFilters.querySelectorAll('[data-plant-filter]')];
+    const count = document.querySelector('[data-catalog-count]');
+    plantFilters.hidden = false;
+    buttons.forEach(button => button.addEventListener('click', () => {
+        const category = button.dataset.plantFilter;
+        buttons.forEach(item => item.setAttribute('aria-pressed', String(item === button)));
+        cards.forEach(card => { card.hidden = category !== 'all' && card.dataset.plantCategory !== category; });
+        count.textContent = String(cards.filter(card => !card.hidden).length);
+        requestScroll();
+    }));
+}

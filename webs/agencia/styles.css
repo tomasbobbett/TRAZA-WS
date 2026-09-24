@@ -198,6 +198,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .niche-demo--academy { --niche: #ffca28; box-shadow: 10px 10px 0 #172968; }
 .niche-demo--home { --niche: #a8e832; }
 .niche-demo--event { --niche: #ff61a1; }
+.niche-demo--garden { --niche: #c1d394; border-radius: 0 100px 0 0; }
 .niche-demo--stay { --niche: #efbb89; border-radius: 140px 140px 0 0; }
 .demo-catalog__footer { display: flex; align-items: center; justify-content: space-between; gap: 30px; border-top: 1px solid var(--line-light); margin-top: 52px; padding-top: 30px; }
 .demo-catalog__footer p { max-width: 540px; margin: 0; color: #5b6069; }

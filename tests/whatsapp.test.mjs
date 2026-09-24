@@ -14,7 +14,7 @@ const declarations = text => Object.fromEntries(text.split(';').map(s => s.trim(
 }));
 const rule = (css, selector) => declarations(css.slice(css.indexOf(selector + ' {') + selector.length + 2).split('}')[0]);
 
-test('the 12 demos and PULSO secondary pages use the TRAZA contact identity', async () => {
+test('all demos and PULSO secondary pages use the TRAZA contact identity', async () => {
     const pages = ['1_basico/index.html', ...['contacto', 'faqs', 'sedes'].map(p => `1_basico/pages/${p}.html`), ...Object.keys(DEMOS).map(p => `nichos/${p}.html`)];
     for (const path of pages) {
         const html = await read(path);

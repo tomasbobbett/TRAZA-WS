@@ -1,5 +1,75 @@
 // Human-written copy: Spanish | English | Brazilian Portuguese.
 const rows = `
+Vivero & jardín · Buenos Aires | Plant nursery & garden · Buenos Aires | Viveiro & jardim · Buenos Aires
+Un poco de verde. | A little greenery. | Um pouco de verde.
+Otra forma de vivir. | A new way to live. | Um novo jeito de viver.
+Plantas, macetas y pequeños rituales para llenar de vida tu casa. Te ayudamos a encontrar el verde que va con vos. | Plants, pots and little rituals to bring your home to life. We help you find greenery that fits your lifestyle. | Plantas, vasos e pequenos rituais para encher sua casa de vida. Ajudamos você a encontrar o verde que combina com você.
+Encontrar mi planta | Find my plant | Encontrar minha planta
+Plantas | Plants | Plantas
+Cuidados | Plant care | Cuidados
+Elegí con calma · consultanos por WhatsApp | Take your time · ask us on WhatsApp | Escolha com calma · fale pelo WhatsApp
+Plantas de interior | Indoor plants | Plantas de interior
+Rincones verdes | Green corners | Cantinhos verdes
+Suculentas | Succulents | Suculentas
+Macetas | Pots | Vasos
+Sustratos | Potting mixes | Substratos
+Hecho para crecer | Made to grow | Feito para crescer
+Interior | Indoors | Interior
+verde para tu casa | greenery for your home | verde para sua casa
+A tu ritmo | At your pace | No seu ritmo
+cuidados simples | simple care | cuidados simples
+Con vos | By your side | Com você
+desde la primera hoja | from the first leaf | desde a primeira folha
+Hay una planta para tu forma de vivir. | A plant for the way you live. | Uma planta para o seu jeito de viver.
+La luz de tu casa, el espacio y tu rutina importan. Contanos cómo es tu rincón y te ayudamos a elegir una planta que lo disfrute tanto como vos. | Your light, space and routine matter. Tell us about your corner and we will help you choose a plant that enjoys it as much as you do. | A luz da sua casa, o espaço e a rotina importam. Conte como é seu cantinho e ajudamos a escolher uma planta que goste dele tanto quanto você.
+Tu rincón verde | Your green corner | Seu cantinho verde
+Plantas para interiores luminosos, patios y balcones. Encontramos la indicada para cada ambiente. | Plants for bright interiors, patios and balconies. We find the right one for each space. | Plantas para interiores iluminados, pátios e varandas. Encontramos a ideal para cada ambiente.
+Asesoramiento | Guidance | Orientação
+Regalá vida | Give something living | Dê vida de presente
+Una planta, una maceta y un mensaje especial. Un regalo que sigue creciendo. | A plant, a pot and a special message. A gift that keeps growing. | Uma planta, um vaso e uma mensagem especial. Um presente que continua crescendo.
+Con intención | Thoughtfully chosen | Com carinho
+Todo para crecer | Everything to grow | Tudo para crescer
+Macetas, sustratos y herramientas para acompañar cada nueva hoja. | Pots, potting mixes and tools for every new leaf. | Vasos, substratos e ferramentas para acompanhar cada nova folha.
+Para cuidar | For plant care | Para cuidar
+SELECCIÓN BOTÁNICA | BOTANICAL SELECTION | SELEÇÃO BOTÂNICA
+Encontrá tu | Find your | Encontre sua
+próxima planta. | next plant. | próxima planta.
+Explorá esta selección y consultanos por tamaños, precios y disponibilidad. Te ayudamos a elegir. | Explore this selection and ask about sizes, prices and availability. We help you choose. | Explore esta seleção e consulte tamanhos, preços e disponibilidade. Ajudamos você a escolher.
+Filtrar el catálogo | Filter the catalog | Filtrar o catálogo
+Ver todo | View all | Ver tudo
+Accesorios | Accessories | Acessórios
+Opciones en esta selección: | Options in this selection: | Opções nesta seleção:
+Monstera | Monstera | Costela-de-adão
+Monstera de hojas grandes en una maceta blanca | Large-leaved monstera in a white pot | Costela-de-adão de folhas grandes em um vaso branco
+Hojas grandes para darle protagonismo a ese rincón luminoso. | Bold leaves to make a bright corner stand out. | Folhas grandes para dar destaque àquele cantinho iluminado.
+Luz indirecta | Indirect light | Luz indireta
+Dejar secar la capa superior | Let the top layer dry | Deixe a camada superficial secar
+Helecho | Fern | Samambaia
+Frondas verdes de un helecho | Green fern fronds | Folhas verdes de uma samambaia
+Verde abundante para espacios frescos, húmedos y sin sol directo. | Lush greenery for cool, humid spaces away from direct sunlight. | Verde abundante para espaços frescos, úmidos e sem sol direto.
+Semisombra | Partial shade | Meia-sombra
+Sustrato ligeramente húmedo | Slightly moist soil | Substrato levemente úmido
+Suculenta cebra | Zebra succulent | Suculenta-zebra
+Suculenta de hojas rayadas en una maceta verde agua | Striped succulent in a mint-green pot | Suculenta de folhas listradas em um vaso verde-água
+Pequeña, de crecimiento lento y perfecta para empezar. | Small, slow-growing and a lovely place to start. | Pequena, de crescimento lento e perfeita para começar.
+Luz brillante indirecta | Bright indirect light | Luz indireta intensa
+Dejar secar entre riegos | Let dry between waterings | Deixe secar entre as regas
+Kit de trasplante | Repotting kit | Kit de transplante
+Palita, sustrato y macetas sobre una mesa de jardinería | Trowel, potting mix and pots on a gardening table | Pazinha, substrato e vasos sobre uma mesa de jardinagem
+Lo esencial para cambiar de maceta y darle lugar a nuevas raíces. | The essentials for repotting and making room for new roots. | O essencial para trocar de vaso e dar espaço a novas raízes.
+Sustrato + herramientas | Potting mix + tools | Substrato + ferramentas
+Te orientamos para usarlo | Guidance on how to use it | Orientamos você no uso
+Consultar por WhatsApp | Ask on WhatsApp | Consultar pelo WhatsApp
+No hace falta saber. | No expertise needed. | Não precisa saber tudo.
+Hace falta empezar. | Just a place to start. | Basta começar.
+Te contamos dónde ubicar tu planta, cómo reconocer cuándo necesita agua y cuándo cambiarla de maceta. Cuidados claros, sin complicarte la vida. Y si aparece una duda, nos mandás una foto por WhatsApp. | We explain where to place your plant, how to tell when it needs water and when to repot it. Clear care advice that fits your life. If a question comes up, send us a photo on WhatsApp. | Explicamos onde colocar sua planta, como perceber quando precisa de água e quando trocar de vaso. Cuidados claros, sem complicar a vida. Se surgir uma dúvida, envie uma foto pelo WhatsApp.
+Quiero ayuda para elegir | Help me choose | Quero ajuda para escolher
+Llegué sin saber qué planta elegir. Me fui con una para mi casa y las ganas de seguir sumando verde. | I arrived unsure which plant to choose. I left with one for my home and the urge to keep adding greenery. | Cheguei sem saber qual planta escolher. Saí com uma para casa e vontade de continuar trazendo mais verde.
+— CLARA, CLIENTA ILUSTRATIVA | — CLARA, SAMPLE CUSTOMER | — CLARA, CLIENTE ILUSTRATIVA
+Lun a sáb · 9 a 18 h | Mon–Sat · 9 am–6 pm | Seg a sáb · 9h às 18h
+Consultar retiro o envío | Ask about pickup or delivery | Consultar retirada ou entrega
+Tu próximo rincón verde | Your next green corner | Seu próximo cantinho verde
+empieza acá. | starts here. | começa aqui.
 Saltar al contenido | Skip to content | Pular para o conteúdo
 Navegación principal | Main navigation | Navegação principal
 Abrir menú | Open menu | Abrir menu

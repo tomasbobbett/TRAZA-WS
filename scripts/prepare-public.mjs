@@ -10,7 +10,7 @@ const root = join(site, 'webs');
 const publicDir = join(site, 'public');
 const config = JSON.parse(await readFile(join(site, 'site.config.json'), 'utf8'));
 const origin = resolveOrigin(config);
-const version = '20260924-carousel';
+const version = '20260924-vivero';
 const exists = async p => stat(p).then(() => true, () => false);
 const esc = s => String(s).replaceAll('&', '&amp;').replaceAll('"', '&quot;').replaceAll('<', '&lt;').replaceAll('>', '&gt;');
 async function output(path, text) { await mkdir(dirname(path), { recursive: true }); await writeFile(path, text); }
@@ -67,7 +67,7 @@ for (const [key, demo] of Object.entries(DEMOS)) {
   const title = `${demo.brand} — ${demo.label.split(' · ')[0]} | Demo TRAZA`;
   const description = `Demo conceptual de ${demo.brand}. ${demo.description}`;
   const html = head(title,description,key,`/nichos/${key}.html`,demo.heroImage,`<link rel="stylesheet" href="demo.css?v=${version}"><link rel="stylesheet" href="../assets/whatsapp.css?v=20260910-traza">`)
-    .replace('<meta name="theme-color" content="#080b12">', `<meta name="theme-color" content="${({blush:'#2e2223',clinic:'#0b2930',fire:'#1e0c08',estate:'#17241c',legal:'#0c182a',garage:'#0c0c0c',vet:'#24372a',academy:'#15225d',home:'#0d2d3c',event:'#110512',stay:'#25261f'})[demo.theme]}">`)
+    .replace('<meta name="theme-color" content="#080b12">', `<meta name="theme-color" content="${({blush:'#2e2223',clinic:'#0b2930',fire:'#1e0c08',estate:'#17241c',legal:'#0c182a',garage:'#0c0c0c',vet:'#24372a',academy:'#15225d',home:'#0d2d3c',event:'#110512',stay:'#25261f',garden:'#172e23'})[demo.theme]}">`)
     + `<body data-demo="${key}" class="theme-${demo.theme} layout-${demo.layout}">${renderDemo(demo,config.whatsapp)}<script src="demo.js?v=${version}" defer></script></body></html>`;
   await output(join(publicDir, 'nichos', `${key}.html`),html);
 }
@@ -106,7 +106,7 @@ for (const [filename, html] of Object.entries(pages)) {
 
 // Override all share metadata together to prevent inherited or stale cards.
 for (const [path,title,description,image] of [
-  ['agencia/index.html','TRAZA — Webs que resuelven','Diseño y desarrollo web para negocios argentinos. Explorá 12 demos con identidad propia y consultá por tu proyecto.','/agencia/og-catalogo.png'],
+  ['agencia/index.html','TRAZA — Webs que resuelven','Diseño y desarrollo web para negocios argentinos. Explorá 13 demos con identidad propia y consultá por tu proyecto.','/agencia/og-catalogo.png'],
   ['1_basico/index.html','PULSO — Club de fuerza | Demo TRAZA','Demo conceptual de un gimnasio boutique: fuerza, entrenamiento y comunidad. Una web de ejemplo creada por TRAZA.','/1_basico/img/sentadilla.jpg']
 ]) {
   let html=await readFile(join(publicDir,path),'utf8');
@@ -142,4 +142,4 @@ for (const path of routes.map(route => route.slice(1))) {
   if(path==='agencia/privacidad.html') html=html.replace('<h2>Servicios externos</h2>','<h2>Preferencia de movimiento</h2><p>El control de animaciones guarda tu elección sólo durante esta sesión del navegador. No se envía a un servidor.</p><h2>Servicios externos</h2>');
   if(sourceExists)await output(sourcePath,html);
 }
-console.log(`Prepared ${routes.length} content pages, 13 icon families and a 404 page. ${origin ? 'Canonical URLs and sitemap configured.' : 'Set site.config.json origin when the final domain is available.'}`);
+console.log(`Prepared ${routes.length} content pages, ${Object.keys(DEMOS).length + 2} icon families and a 404 page. ${origin ? 'Canonical URLs and sitemap configured.' : 'Set site.config.json origin when the final domain is available.'}`);

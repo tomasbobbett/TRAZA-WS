@@ -40,4 +40,4 @@ await writeFile(join(output, 'enlaces.txt'), 'TRAZA — Demos por rubro para env
   + 'Copiá únicamente el enlace del rubro de tu cliente. Abre su demo sin pasar por el catálogo.\n\n'
   + (origin ? '' : 'Agregar el dominio publicado delante de cada ruta.\n\n')
   + links.map(([label, route]) => `${label}\n${origin}${route}`).join('\n\n') + '\n');
-console.log(`Netlify: public/ listo, portada completa y 12 demos. ${origin || 'El dominio se detectará al compilar en Netlify.'}`);
+console.log(`Netlify: public/ listo, portada completa y ${DEMO_ROUTES.length} demos. ${origin || 'El dominio se detectará al compilar en Netlify.'}`);

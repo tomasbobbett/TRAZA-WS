@@ -1,6 +1,6 @@
 # TRAZA
 
-Sitio de TRAZA y catálogo de 12 demos web por rubro.
+Sitio de TRAZA y catálogo de 13 demos web por rubro.
 
 ## Netlify
 
@@ -25,20 +25,24 @@ Ejecutar npm run build y luego npm run preview. La vista previa está en http://
 
 Cada rubro tiene una página independiente en `/demo/<rubro>/`. Por ejemplo, `/demo/gimnasio/`, `/demo/estetica/` y `/demo/gastronomia/`. El cliente entra directamente en su demo, sin pasar por el catálogo ni encontrar enlaces a otros rubros. Las consultas llegan a WhatsApp con el nombre de la demo.
 
-`/enlaces.txt` contiene las 12 direcciones para copiar y enviar al cliente. El dominio configurado es `https://trraza.netlify.app`; Netlify lo adapta automáticamente en las vistas previas. Las direcciones anteriores siguen funcionando.
+`/enlaces.txt` contiene las 13 direcciones para copiar y enviar al cliente. El dominio configurado es `https://trraza.netlify.app`; Netlify lo adapta automáticamente en las vistas previas. Las direcciones anteriores siguen funcionando.
 
 PULSO también tiene contacto, preguntas y sede dentro de `/demo/gimnasio/`. Las páginas comparten recursos visuales para mantener las animaciones y evitar duplicar imágenes. `scripts/demo-routes.mjs` define las direcciones; `public/` debe publicarse completo.
 
 ## Idiomas de las demos
 
-Las 12 demos y las tres páginas internas de PULSO incluyen un selector compacto con un globo, el idioma actual (ES, EN o PT) y una flecha. Al abrirlo, un menú hacia abajo ofrece Español, English y Português, sin desplazar la navegación. Se cierra al elegir, hacer clic afuera, salir con Tab o presionar Escape; también admite las flechas del teclado. Español es el idioma inicial; la preferencia se guarda en el navegador. Se puede compartir una demo directamente en inglés con `?lang=en`, en portugués de Brasil con `?lang=pt` o en español con `?lang=es`. El parámetro del enlace tiene prioridad sobre la preferencia guardada.
+Las 13 demos y las tres páginas internas de PULSO incluyen un selector compacto con un globo, el idioma actual (ES, EN o PT) y una flecha. Al abrirlo, un menú hacia abajo ofrece Español, English y Português, sin desplazar la navegación. Se cierra al elegir, hacer clic afuera, salir con Tab o presionar Escape; también admite las flechas del teclado. Español es el idioma inicial; la preferencia se guarda en el navegador. Se puede compartir una demo directamente en inglés con `?lang=en`, en portugués de Brasil con `?lang=pt` o en español con `?lang=es`. El parámetro del enlace tiene prioridad sobre la preferencia guardada.
 
 Las traducciones están en `scripts/translations.mjs`. Incluyen contenido, metadatos en el navegador, accesibilidad, formularios y mensajes preparados de WhatsApp. `scripts/i18n.mjs` verifica la cobertura al compilar e incorpora sólo las traducciones de cada página; si se agrega texto sin traducir, la compilación indica qué falta. Los nombres de las marcas y las direcciones se conservan. El cambio de idioma no recarga la página ni borra campos completados.
 
 Para revisar las demos, usar la salida compilada de `npm run preview`. Sin JavaScript mantienen el contenido completo en español. Las tarjetas de enlaces de redes sociales siguen usando los metadatos estáticos en español.
 
-Con la vista previa en marcha, `npm run verify:languages` comprueba las 15 páginas en los tres idiomas y en siete anchos (320, 390, 1024, 1120, 1121, 1280 y 1440 px), incluyendo el cambio entre la navegación móvil y la de escritorio y la posición del desplegable abierto. También verifica selección por teclado, preferencia guardada, enlaces compartidos, navegación sin almacenamiento, galería, preguntas, animaciones y formularios. Las consultas de WhatsApp se interceptan durante la prueba y no se envían.
+Con la vista previa en marcha, `npm run verify:languages` comprueba las 16 páginas en los tres idiomas y en siete anchos (320, 390, 1024, 1120, 1121, 1280 y 1440 px), incluyendo el cambio entre la navegación móvil y la de escritorio y la posición del desplegable abierto. También verifica selección por teclado, preferencia guardada, enlaces compartidos, navegación sin almacenamiento, galería, preguntas, animaciones y formularios. Las consultas de WhatsApp se interceptan durante la prueba y no se envían.
 
 Los informes y las capturas se guardan en `qa-languages/`, fuera del sitio publicado y del repositorio. La revisión requiere Playwright instalado o disponible mediante `NODE_PATH`, y Edge, o la variable `BROWSER_CHANNEL` para otro navegador compatible. `PREVIEW_URL` permite cambiar la dirección de la vista previa. Las comprobaciones de diseño e interacciones también se pueden ejecutar por separado con `node scripts/verify-languages.mjs` y `node scripts/verify-language-interactions.mjs`.
 
 La [base de clientes potenciales](clientes-potenciales/README.md) contiene la planilla comercial actualizada con negocios, rubros y contactos públicos de distintos países. Se versiona junto al proyecto y queda fuera de la web publicada.
+
+La demo de vivero **RAÍZ** está en `/demo/vivero/`. Incluye un catálogo con filtros, fichas de cuidado y consultas por producto, además de los tres idiomas y las animaciones compartidas. Las fotos se incluyen como recursos locales.
+
+Con la vista previa en marcha, `node scripts/verify-vivero.mjs` verifica RAÍZ en tres idiomas y ocho anchos, filtros, consultas, menú móvil y contenido sin JavaScript. Guarda capturas e informe en `qa-vivero/`, fuera del repositorio. Usa los mismos requisitos de Playwright, `NODE_PATH` y `PREVIEW_URL` de las comprobaciones de idiomas. Las fuentes de las fotografías están en `scripts/vivero-image-sources.json`; las tipografías locales incluyen sus licencias en `webs/assets/vivero/`.

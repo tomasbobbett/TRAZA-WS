@@ -1,4 +1,33 @@
 export const DEMOS = {
+    vivero: {
+        theme: 'garden', layout: 'botanical', brand: 'RAÍZ', label: 'Vivero & jardín · Buenos Aires',
+        headline: 'Un poco de verde.<br><em>Otra forma de vivir.</em>',
+        description: 'Plantas, macetas y pequeños rituales para llenar de vida tu casa. Te ayudamos a encontrar el verde que va con vos.',
+        heroImage: '/assets/vivero/invernadero.jpg', storyImage: '/assets/vivero/vivero.jpg',
+        alt: 'Plantas en macetas dentro de un invernadero', action: 'Encontrar mi planta',
+        primaryAnchor: '#catalogo', navServices: 'Plantas', navExperience: 'Cuidados',
+        accentNote: 'Elegí con calma · consultanos por WhatsApp',
+        strip: ['Plantas de interior', 'Rincones verdes', 'Suculentas', 'Macetas', 'Sustratos', 'Hecho para crecer'],
+        metrics: [['Interior', 'verde para tu casa'], ['A tu ritmo', 'cuidados simples'], ['Con vos', 'desde la primera hoja']],
+        intro: ['Hay una planta para tu forma de vivir.', 'La luz de tu casa, el espacio y tu rutina importan. Contanos cómo es tu rincón y te ayudamos a elegir una planta que lo disfrute tanto como vos.'],
+        services: [
+            ['01', 'Tu rincón verde', 'Plantas para interiores luminosos, patios y balcones. Encontramos la indicada para cada ambiente.', 'Asesoramiento'],
+            ['02', 'Regalá vida', 'Una planta, una maceta y un mensaje especial. Un regalo que sigue creciendo.', 'Con intención'],
+            ['03', 'Todo para crecer', 'Macetas, sustratos y herramientas para acompañar cada nueva hoja.', 'Para cuidar']
+        ],
+        catalog: [
+            { name: 'Monstera', category: 'interior', label: 'Interior', image: '/assets/vivero/monstera.jpg', alt: 'Monstera de hojas grandes en una maceta blanca', description: 'Hojas grandes para darle protagonismo a ese rincón luminoso.', light: 'Luz indirecta', water: 'Dejar secar la capa superior' },
+            { name: 'Helecho', category: 'interior', label: 'Interior', image: '/assets/vivero/verde.jpg', alt: 'Frondas verdes de un helecho', description: 'Verde abundante para espacios frescos, húmedos y sin sol directo.', light: 'Semisombra', water: 'Sustrato ligeramente húmedo' },
+            { name: 'Suculenta cebra', category: 'suculentas', label: 'Suculentas', image: '/assets/vivero/interior.jpg', alt: 'Suculenta de hojas rayadas en una maceta verde agua', description: 'Pequeña, de crecimiento lento y perfecta para empezar.', light: 'Luz brillante indirecta', water: 'Dejar secar entre riegos' },
+            { name: 'Kit de trasplante', category: 'accesorios', label: 'Accesorios', image: '/assets/vivero/vivero.jpg', alt: 'Palita, sustrato y macetas sobre una mesa de jardinería', description: 'Lo esencial para cambiar de maceta y darle lugar a nuevas raíces.', light: 'Sustrato + herramientas', water: 'Te orientamos para usarlo' }
+        ],
+        storyTitle: 'No hace falta saber.<br><em>Hace falta empezar.</em>',
+        storyCopy: 'Te contamos dónde ubicar tu planta, cómo reconocer cuándo necesita agua y cuándo cambiarla de maceta. Cuidados claros, sin complicarte la vida. Y si aparece una duda, nos mandás una foto por WhatsApp.',
+        storyAction: 'Quiero ayuda para elegir',
+        quote: 'Llegué sin saber qué planta elegir. Me fui con una para mi casa y las ganas de seguir sumando verde.', person: '— CLARA, CLIENTA ILUSTRATIVA',
+        location: 'Zona norte · Buenos Aires', hours: 'Lun a sáb · 9 a 18 h', booking: 'Consultar retiro o envío',
+        visitTitle: 'Tu próximo rincón verde<br><em>empieza acá.</em>'
+    },
     estetica: {
         theme: 'blush', layout: 'soft', brand: 'ALMA', label: 'Estética integral · Palermo',
         headline: 'Tu piel.<br><em>Tu mejor versión.</em>',
@@ -214,6 +243,7 @@ export const DEMOS = {
 export function renderDemo(demo, TRAZA_PHONE) {
     const whatsappText = encodeURIComponent(`Hola, vi la demo ${demo.brand} de TRAZA y quiero una web así para mi negocio.`);
     const wa = `https://wa.me/${TRAZA_PHONE}?text=${whatsappText}`;
+    const primaryLink = demo.primaryAnchor ? `href="${demo.primaryAnchor}"` : `href="${wa}" target="_blank" rel="noopener"`;
     const serviceMarkup = demo.services.map(([number, title, copy, tag], index) => `
         <a class="service-card reveal tilt" style="--delay:${index * 80}ms" href="https://wa.me/${TRAZA_PHONE}?text=${encodeURIComponent(`Hola, vi la demo ${demo.brand} de TRAZA, en la sección ${title}, y quiero una web así para mi negocio.`)}" target="_blank" rel="noopener" aria-label="Consultar por la demo ${demo.brand}: ${title}">
             <div class="service-card__top"><span>${number}</span><small>${tag}</small></div>
@@ -221,6 +251,23 @@ export function renderDemo(demo, TRAZA_PHONE) {
         </a>`).join('');
     const metricsMarkup = demo.metrics.map(([value, label]) => `<div><strong>${value}</strong><span>${label}</span></div>`).join('');
     const stripMarkup = [...demo.strip, ...demo.strip].map(item => `<span>${item}<i>✦</i></span>`).join('');
+    const catalogMarkup = demo.catalog ? `
+        <section class="plant-catalog section" id="catalogo" aria-labelledby="catalog-title">
+            <div class="shell">
+                <div class="catalog-heading reveal"><div><p class="section-index">SELECCIÓN BOTÁNICA</p><h2 class="section-title" id="catalog-title">Encontrá tu<br><em>próxima planta.</em></h2></div><p class="section-copy">Explorá esta selección y consultanos por tamaños, precios y disponibilidad. Te ayudamos a elegir.</p></div>
+                <div class="catalog-filters" role="group" aria-label="Filtrar el catálogo" hidden>
+                    ${[['all','Ver todo'],['interior','Interior'],['suculentas','Suculentas'],['accesorios','Accesorios']].map(([key, label]) => `<button type="button" data-plant-filter="${key}" aria-pressed="${key === 'all'}" aria-controls="plant-grid">${label}</button>`).join('')}
+                </div>
+                <p class="catalog-status" role="status" aria-live="polite" aria-atomic="true"><span>Opciones en esta selección:</span> <span data-catalog-count>${demo.catalog.length}</span></p>
+                <div class="plant-grid" id="plant-grid">${demo.catalog.map(plant => `
+                    <article class="plant-card reveal" data-plant-category="${plant.category}">
+                        <div class="plant-photo"><img src="${plant.image}" alt="${plant.alt}" width="800" height="900" loading="lazy" decoding="async"><span>${plant.label}</span></div>
+                        <div class="plant-info"><h3>${plant.name}</h3><p>${plant.description}</p><ul class="plant-care"><li>${plant.light}</li><li>${plant.water}</li></ul>
+                        <a href="https://wa.me/${TRAZA_PHONE}?text=${encodeURIComponent(`Hola, vi la demo ${demo.brand} de TRAZA, en la sección ${plant.name}, y quiero una web así para mi negocio.`)}" target="_blank" rel="noopener" aria-label="Consultar por la demo ${demo.brand}: ${plant.name}">Consultar por WhatsApp <span aria-hidden="true">↗</span></a></div>
+                    </article>`).join('')}
+                </div>
+            </div>
+        </section>` : '';
 
     return `
         <a class="skip-link" href="#contenido">Saltar al contenido</a>
@@ -228,8 +275,8 @@ export function renderDemo(demo, TRAZA_PHONE) {
         <nav class="nav" aria-label="Navegación principal">
             <a class="brand" href="#inicio"><b>${demo.brand}</b><small>Demo conceptual</small></a>
             <button aria-controls="demo-menu" class="menu-button" type="button" aria-label="Abrir menú" aria-expanded="false"><i></i><i></i></button>
-            <div class="nav-links" id="demo-menu"><a href="#servicios">Servicios</a><a href="#experiencia">Experiencia</a><a href="#visitanos">Visitanos</a></div>
-            <a class="nav-cta" href="${wa}" target="_blank" rel="noopener">${demo.action} <span>↗</span></a>
+            <div class="nav-links" id="demo-menu"><a href="${demo.primaryAnchor || '#servicios'}">${demo.navServices || 'Servicios'}</a><a href="#experiencia">${demo.navExperience || 'Experiencia'}</a><a href="#visitanos">Visitanos</a></div>
+            <a class="nav-cta" ${primaryLink}>${demo.action} <span>↗</span></a>
         </nav>
 
         <main id="contenido">
@@ -241,7 +288,7 @@ export function renderDemo(demo, TRAZA_PHONE) {
                     <h1 class="reveal" style="--delay:90ms">${demo.headline}</h1>
                     <p class="hero-copy reveal" style="--delay:170ms">${demo.description}</p>
                     <div class="hero-actions reveal" style="--delay:240ms">
-                        <a class="button button-primary magnetic" href="${wa}" target="_blank" rel="noopener">${demo.action}<span>↗</span></a>
+                        <a class="button button-primary magnetic" ${primaryLink}>${demo.action}<span>↗</span></a>
                         <a class="button button-ghost" href="#servicios">Conocer más <span>↓</span></a>
                     </div>
                 </div>
@@ -250,6 +297,7 @@ export function renderDemo(demo, TRAZA_PHONE) {
             </header>
 
             <div class="marquee"><div aria-hidden="true">${stripMarkup}</div></div>
+            ${catalogMarkup}
 
             <section class="intro section" id="servicios">
                 <div class="shell intro-grid">
@@ -266,7 +314,7 @@ export function renderDemo(demo, TRAZA_PHONE) {
                     <p class="section-index">02 / EXPERIENCIA</p>
                     <h2 class="section-title">${demo.storyTitle}</h2>
                     <p>${demo.storyCopy}</p>
-                    <a href="${wa}" target="_blank" rel="noopener">Conocer el enfoque <span>↗</span></a>
+                    <a href="${wa}" target="_blank" rel="noopener">${demo.storyAction || 'Conocer el enfoque'} <span>↗</span></a>
                 </div>
                 <div class="story-number" aria-hidden="true">02</div>
             </section>
@@ -280,7 +328,7 @@ export function renderDemo(demo, TRAZA_PHONE) {
                 <div class="visit-grid" aria-hidden="true"></div>
                 <div class="shell visit-content">
                     <p class="section-index reveal">03 / VISITANOS</p>
-                    <h2 class="section-title reveal">Todo listo para<br><em>dar el primer paso.</em></h2>
+                    <h2 class="section-title reveal">${demo.visitTitle || 'Todo listo para<br><em>dar el primer paso.</em>'}</h2>
                     <div class="visit-data reveal">
                         <div><small>Dónde</small><strong>${demo.location}</strong></div>
                         <div><small>Cuándo</small><strong>${demo.hours}</strong></div>

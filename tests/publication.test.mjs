@@ -3,8 +3,11 @@ import { readFile, readdir, stat } from 'node:fs/promises';
 import { resolve, join, extname, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import test from 'node:test';
+import { resolveOrigin } from '../scripts/site-origin.mjs';
 import { DEMOS } from '../scripts/demo-content.mjs';
 
+const config=JSON.parse(await readFile(new URL('../site.config.json', import.meta.url),'utf8'));
+const origin=resolveOrigin(config);
 const root=resolve(dirname(fileURLToPath(import.meta.url)),'../public');
 async function walk(folder) { const result=[]; for(const entry of await readdir(folder,{withFileTypes:true})) { const p=join(folder,entry.name); if(entry.isDirectory())result.push(...await walk(p));else result.push(p); }return result; }
 const files=await walk(root);
@@ -13,7 +16,7 @@ const exists=p=>stat(p).then(()=>true,()=>false);
 const attrs=tag=>Object.fromEntries([...tag.matchAll(/([\w:-]+)="([^"]*)"/g)].map(m=>[m[1],m[2].replaceAll('&amp;','&')]));
 
 test('every public page contains content, identity, language and share metadata without JavaScript',async()=>{
-  assert.equal(pages.length,34);
+  assert.equal(pages.length,36);
   for(const file of pages) {
     const html=await readFile(file,'utf8');
     assert.match(html,/<html lang="es-AR">/,file);
@@ -55,14 +58,14 @@ test('each shareable demo has its own brand and primary image',async()=>{
     const html=await readFile(join(root,'nichos',`${key}.html`),'utf8');
     assert.ok(html.includes(`<title>${demo.brand} —`));
     assert.ok(html.includes(`property="og:title" content="${demo.brand} —`));
-    assert.ok(html.includes(`property="og:image" content="${demo.heroImage.replaceAll('&','&amp;')}"`));
+    assert.ok(html.includes(`property="og:image" content="${new URL(demo.heroImage, origin).href.replaceAll('&','&amp;')}"`));
     assert.doesNotMatch(html,/og-catalogo\.png/);
     assert.ok(html.includes(`assets/icons/${key}/favicon.ico`));
     assert.match(html,/no se realizan reservas/);
   }
 });
 
-test('all 13 favicon families have valid ICO, PNG sizes and manifests',async()=>{
+test('all favicon families have valid ICO, PNG sizes and manifests',async()=>{
   for(const key of ['traza','pulso',...Object.keys(DEMOS)]) {
     const folder=join(root,'assets/icons',key);
     const ico=await readFile(join(folder,'favicon.ico'));

@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "description": "TRAZA y doce demos comerciales listas para Netlify",
+  "description": "TRAZA y trece demos comerciales listas para Netlify",
   "engines": { "node": ">=22.13.0" },
   "scripts": {
     "build": "node scripts/build.mjs && node --test tests/*.test.mjs",
