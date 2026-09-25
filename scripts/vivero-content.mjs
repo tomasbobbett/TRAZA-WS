@@ -30,30 +30,27 @@ export function renderNursery() {
     <a class="skip-link" href="#contenido">Saltar al contenido</a>
     <div class="progress" aria-hidden="true"><i></i></div>
     <nav class="nav" aria-label="Navegación principal">
-        <a class="brand nursery-brand" href="#inicio"><span class="nursery-mark" aria-hidden="true">✳</span><span><small>Vivero</small><b>la Loma</b></span></a>
+        <a class="brand nursery-brand" href="#inicio"><span class="nursery-mark" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none"><path d="M16 27V16M16 19C7 20 4 14 5 7c8-1 13 4 11 12Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 15C15 7 20 3 27 4c1 7-3 12-11 11Z" fill="currentColor"/><path d="m9 12 7 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span><span><small>Vivero</small><b>la Loma</b></span></a>
         <button aria-controls="demo-menu" class="menu-button" type="button" aria-label="Abrir menú" aria-expanded="false"><i></i><i></i></button>
         <div class="nav-links" id="demo-menu"><a href="#catalogo">Frutales</a><a href="#proyectos">Proyectos</a><a href="#preguntas">Preguntas</a><a href="#visitanos">Ubicación</a></div>
         <a class="nav-cta" href="#cotizar">Cotizar mi proyecto <span>↗</span></a>
     </nav>
     <main id="contenido">
         <header class="hero nursery-hero" id="inicio">
-            <div class="hero-media" aria-hidden="true"><img src="${nursery.heroImage}" alt="" fetchpriority="high" width="1800" height="1200"><span></span></div>
-            <div class="hero-content shell">
+            <div class="shell nursery-hero-layout"><div class="hero-content">
                 <h1 class="reveal">Buenas raíces.<br><em>Nuevas cosechas.</em></h1>
-                <p class="hero-copy reveal">Plantas frutales injertadas para hacer crecer tu producción y los proyectos de tu comunidad.</p>
+                <p class="hero-copy reveal">Frutales injertados para tu producción y los proyectos de tu comunidad.</p>
                 <p class="nursery-audience reveal">Productores · Municipios · ONG y cooperación</p>
                 <div class="hero-actions reveal"><a class="button button-primary magnetic" href="#cotizar">Cotizar mi proyecto <span>↗</span></a><a class="button button-ghost" href="#catalogo">Explorar frutales <span>↓</span></a></div>
-                <p class="nursery-hero-note reveal">Contanos qué querés plantar. Empecemos por una conversación.</p>
-            </div>
-            <div class="nursery-photo-label">De la planta al proyecto.</div>
+            </div><div class="nursery-hero-photo"><div class="hero-media" aria-hidden="true"><img src="${nursery.heroImage}" alt="" fetchpriority="high" width="1800" height="1200"><span></span></div><div class="nursery-photo-label">De la planta al proyecto.</div></div></div>
             <div class="hero-metrics shell" aria-label="Nuestra propuesta"><div><strong>Injertados</strong><span>Especialidad del vivero</span></div><div><strong>A tu escala</strong><span>Consultas por cantidad</span></div><div><strong>El Torno</strong><span>Santa Cruz · Bolivia</span></div></div>
         </header>
         <section class="nursery-intro section" id="proyectos">
             <div class="shell"><div class="catalog-heading reveal"><div><h2 class="section-title">Tu objetivo.<br><em>Nuestro punto de partida.</em></h2></div><p class="section-copy">Una plantación productiva, un programa municipal o una iniciativa comunitaria. La propuesta empieza por entender para quién plantamos.</p></div>
             <div class="nursery-buyers">
-                <a class="nursery-buyer reveal" href="#cotizar" data-buyer="Productor/a"><span class="nursery-card-index">01 —</span><h3>Productores</h3><p>Para iniciar, ampliar o diversificar tu plantación. Consultá especies y cantidades según tu zona y objetivo productivo.</p><span class="nursery-card-link">Planificar mi plantación <b>↗</b></span></a>
-                <a class="nursery-buyer reveal" href="#cotizar" data-buyer="Municipio"><span class="nursery-card-index">02 —</span><h3>Municipios</h3><p>Para huertos comunitarios y programas de entrega de frutales. Contanos el destino, las etapas y los requisitos de tu compra.</p><span class="nursery-card-link">Cotizar un programa <b>↗</b></span></a>
-                <a class="nursery-buyer reveal" href="#cotizar" data-buyer="ONG / fundación"><span class="nursery-card-index">03 —</span><h3>ONG y cooperación</h3><p>Para iniciativas de seguridad alimentaria y desarrollo rural de ONG, FAO y otros organismos. Conversemos sobre el alcance de tu proyecto.</p><span class="nursery-card-link">Consultar por mi organización <b>↗</b></span></a>
+                <a class="nursery-buyer reveal" href="#cotizar" data-buyer="Productor/a"><span class="nursery-buyer-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21V11M12 15C4 16 2 10 3 4c7-1 12 3 9 11Z"/><path d="M12 10c-1-6 3-9 9-8 1 6-3 9-9 8Z"/></svg></span><h3>Productores</h3><p>Para iniciar, ampliar o diversificar tu plantación. Consultá especies y cantidades según tu zona y objetivo productivo.</p><span class="nursery-card-link">Planificar mi plantación <b>↗</b></span></a>
+                <a class="nursery-buyer reveal" href="#cotizar" data-buyer="Municipio"><span class="nursery-buyer-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V9h14v12M3 9l9-6 9 6M9 21v-7h6v7"/></svg></span><h3>Municipios</h3><p>Para huertos comunitarios y programas de entrega de frutales. Contanos el destino, las etapas y los requisitos de tu compra.</p><span class="nursery-card-link">Cotizar un programa <b>↗</b></span></a>
+                <a class="nursery-buyer reveal" href="#cotizar" data-buyer="ONG / fundación"><span class="nursery-buyer-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3 21v-3a6 6 0 0 1 12 0v3M16 5a3 3 0 0 1 0 6M18 15a5 5 0 0 1 3 4v2"/></svg></span><h3>ONG y cooperación</h3><p>Para iniciativas de seguridad alimentaria y desarrollo rural de ONG, FAO y otros organismos. Conversemos sobre el alcance de tu proyecto.</p><span class="nursery-card-link">Consultar por mi organización <b>↗</b></span></a>
             </div></div>
         </section>
         <section class="plant-catalog section" id="catalogo" aria-labelledby="catalog-title"><div class="shell">
@@ -69,7 +66,7 @@ export function renderNursery() {
             <ol class="nursery-steps"><li class="reveal"><span>01</span><div><h3>Contanos tu proyecto</h3><p>Tipo de comprador, zona de plantación, especies y cantidad aproximada. Podés consultar aunque todavía estés definiendo los detalles.</p></div></li><li class="reveal"><span>02</span><div><h3>Confirmemos la propuesta</h3><p>Solicitá variedades, portainjertos, tamaño, disponibilidad y precio. Para compras institucionales, agregá tus requisitos de documentación.</p></div></li><li class="reveal"><span>03</span><div><h3>Coordinemos el siguiente paso</h3><p>Acordá con el vivero las condiciones de pago, el retiro o la entrega y los plazos antes de confirmar el pedido.</p></div></li></ol>
         </div></section>
         <section class="nursery-quote section" id="cotizar"><div class="shell nursery-quote-grid">
-            <div class="nursery-quote-copy reveal"><h2 class="section-title">Tu proyecto<br><em>puede empezar hoy.</em></h2><p class="section-copy">Completá lo esencial y llevá tu consulta a WhatsApp. Cuantos más detalles compartas, más precisa podrá ser la propuesta.</p><a class="nursery-direct" href="${wa}" ${external}><span>¿Preferís conversar directamente?</span><strong>+591 72139484 <span>↗</span></strong></a><p class="nursery-small">Cotización sujeta a confirmación de disponibilidad, condiciones y destino. Este formulario no confirma una compra.</p></div>
+            <div class="nursery-quote-copy reveal"><h2 class="section-title">Tu proyecto<br><em>puede empezar hoy.</em></h2><p class="section-copy">Completá lo esencial y llevá tu consulta a WhatsApp. Cuantos más detalles compartas, más precisa podrá ser la propuesta.</p><figure class="nursery-quote-photo"><img src="/assets/vivero/limon.jpg" alt="Limón en el árbol, fotografía de referencia" width="800" height="900" loading="lazy" decoding="async"></figure><a class="nursery-direct" href="${wa}" ${external}><span>¿Preferís conversar directamente?</span><strong>+591 72139484 <span>↗</span></strong></a><p class="nursery-small">Cotización sujeta a confirmación de disponibilidad, condiciones y destino. Este formulario no confirma una compra.</p></div>
             <form class="nursery-form" id="nursery-quote" action="https://wa.me/${nursery.whatsapp}" method="get">
                 <input type="hidden" name="text" value="${nurseryMessage}">
                 <div class="nursery-form-fields" hidden>

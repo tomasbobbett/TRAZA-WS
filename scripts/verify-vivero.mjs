@@ -24,7 +24,7 @@ try {
     };
     for (const language of ['es', 'en', 'pt']) {
         await chooseLanguage(language);
-        for (const [width,height] of [[1920,1080],[1440,900],[1366,768],[1280,720],[1280,556],[1121,700],[1120,700],[1024,768],[1024,600],[1024,556],[768,1024],[390,844],[320,568]]) {
+        for (const [width,height] of [[1920,1080],[1440,900],[1366,768],[1280,720],[1280,556],[1121,700],[1120,700],[1024,768],[1024,600],[1024,556],[768,1024],[390,844],[320,568],[844,390],[667,375]]) {
             await page.setViewportSize({ width, height });
             await page.waitForTimeout(200);
             const layout = await page.evaluate(() => {
@@ -36,9 +36,11 @@ try {
                 const hero = document.querySelector('h1').getBoundingClientRect();
                 const nav = document.querySelector('.nav').getBoundingClientRect();
                 const sectionHeights = [...document.querySelectorAll('main>header,main>section')].map(el=>({id:el.id,height:el.offsetHeight}));
-                const heroNote = document.querySelector('.nursery-hero-note').getBoundingClientRect();
+                const heroActions = document.querySelector('.nursery-hero .hero-actions').getBoundingClientRect();
+                const heroPhoto = document.querySelector('.nursery-hero-photo').getBoundingClientRect();
                 const metrics = document.querySelector('.hero-metrics').getBoundingClientRect();
-                return { overflow: document.documentElement.scrollWidth - innerWidth, outside, heroClear: hero.top >= nav.bottom, heroFits:heroNote.bottom <= metrics.top && sectionHeights[0].height <= innerHeight + 2, sectionHeights };
+                const viewportFits = innerHeight <= 460 || sectionHeights[0].height <= innerHeight + 2;
+                return { overflow: document.documentElement.scrollWidth - innerWidth, outside, heroClear: hero.top >= nav.bottom, heroFits:heroActions.bottom <= metrics.top && heroPhoto.bottom <= metrics.top && metrics.bottom <= sectionHeights[0].height && viewportFits, sectionHeights };
             });
             report.layouts.push({ language, width, height, ...layout });
             assert.equal(layout.overflow, 0, `${language}/${width}: horizontal overflow`);
